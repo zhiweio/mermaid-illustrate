@@ -213,7 +213,7 @@ To create a Mermaid diagram:
    
    > **Key rules**:
    > - **`linkStyle`** — **flowchart/graph ONLY**. Sequence diagrams, class diagrams, state diagrams, Gantt charts, etc. do NOT support `linkStyle`; remove `linkStyle` from those diagram types.
-   > - **`classDef` + `class`** — supported in: flowchart, stateDiagram, classDiagram (uses `cssClass`), erDiagram, requirementDiagram, block-beta, treemap-beta (`:::`), quadrantChart. Remove `classDef`/`class` from all other diagram types.
+   > - **`classDef` + `class`** — supported in: flowchart, stateDiagram, classDiagram (uses `cssClass`), erDiagram, requirementDiagram, block-beta, treemap-beta (`:::`), quadrantChart (per-point radii MUST be ≤6 per `examples/quadrant.md`). Remove `classDef`/`class` from all other diagram types.
    > - **`themeVariables`** — supported in: flowchart, sequence, state, ER, class, requirement, timeline, journey, Gantt, pie, gitGraph, block, mindmap (mindmap uses its own mindmap-specific variables: `mindmapRootColor`, `mindmapTextColor`, `mindmapMainColor`, `mindmapSecondaryColor`, `mindmapLineColor`; general variables like `primaryColor` have no effect). For unsupported types, remove the `%%{init: ...}%%` directive.
    > - **C4** uses its own styling: `UpdateElementStyle()` / `UpdateRelStyle()` — does NOT support `classDef`/`linkStyle`/`themeVariables`.
    > - For diagrams without styling support, convey semantics through naming, structure, or built-in tags (e.g., Gantt's `done`/`active`/`crit`/`milestone`).

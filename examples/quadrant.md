@@ -6,6 +6,8 @@ Quadrant charts display items in a 2x2 grid based on two criteria, useful for pr
 
 Quadrant charts support per-point `color`, `stroke-color`, `stroke-width`, and per-class styling. Use semantic colors: high-value = green, high-cost = red, medium = amber.
 
+**Point Radius Rule**: All visible quadrant points MUST use a restrained radius of **4–6** (not larger than 6). The coordinate space is 0–1, so radii ≥ 10 produce disproportionately large circles that dominate the chart. Use `radius: 0` only for hidden-dot multi-line labels (see below). **Never** use `radius` values above 6 for data points.
+
 ### Syntax
 
 - Use `quadrantChart` keyword
@@ -18,8 +20,8 @@ Quadrant charts support per-point `color`, `stroke-color`, `stroke-width`, and p
   - `quadrant-3`: Bottom left quadrant
   - `quadrant-4`: Bottom right quadrant
 - Points: `Point Name: [x, y]` where x and y values are in the range 0-1
-- Point styling: `Point Name: [x, y] radius: 12, color: #da1e28, stroke-color: #0f62fe, stroke-width: 5px`
-- Class styling: `Point Name:::className: [x, y]` with `classDef className color: #198038, radius: 10`
+- Point styling: `Point Name: [x, y] radius: 6, color: #da1e28, stroke-color: #0f62fe, stroke-width: 5px`
+- Class styling: `Point Name:::className: [x, y]` with `classDef className color: #198038, radius: 6`
 - **Multi-line data-point labels (hidden-dot overlay)**: `quadrantChart` natively does NOT support manual line breaks (`<br>`/`\n` are ignored in point labels). To split a point's text across multiple lines, stack additional points at the same X with the Y offset by a **fixed delta of `0.035`** and set their `radius: 0` (hides the dot) so only the text shows — visually faking a multi-line label.
 
 ```
@@ -59,10 +61,10 @@ quadrantChart
     quadrant-2 Low Cost, High Performance
     quadrant-3 Low Cost, Low Performance
     quadrant-4 High Cost, Low Performance
-    Product A: [0.9, 0.0] radius: 12, color: #da1e28
-    Product B: [0.8, 0.1] radius: 10, color: #f1c21b
-    Product C: [0.7, 0.2] radius: 25, color: #198038
-    Product D: [0.6, 0.3] radius: 15, color: #0f62fe
+    Product A: [0.9, 0.0] radius: 6, color: #da1e28
+    Product B: [0.8, 0.1] radius: 5, color: #f1c21b
+    Product C: [0.7, 0.2] radius: 6, color: #198038
+    Product D: [0.6, 0.3] radius: 5, color: #0f62fe
 ```
 
 ### Example (With Class Styling)
@@ -81,9 +83,9 @@ quadrantChart
     Feature C:::lowValue: [0.2, 0.2]
     Feature D:::highValue: [0.8, 0.8]
 
-    classDef highValue color: #198038, radius: 10
-    classDef mediumValue color: #f1c21b, radius: 8
-    classDef lowValue color: #da1e28, radius: 6
+    classDef highValue color: #198038, radius: 6
+    classDef mediumValue color: #f1c21b, radius: 5
+    classDef lowValue color: #da1e28, radius: 4
 ```
 
 ### Example (Business Strategy — BCG Matrix)
@@ -102,10 +104,10 @@ quadrantChart
     Product C:::dog: [0.2, 0.2]
     Product D:::cashcow: [0.7, 0.3]
 
-    classDef star color: #198038, radius: 12
-    classDef questionmark color: #f1c21b, radius: 10
-    classDef dog color: #da1e28, radius: 8
-    classDef cashcow color: #0f62fe, radius: 10
+    classDef star color: #198038, radius: 6
+    classDef questionmark color: #f1c21b, radius: 5
+    classDef dog color: #da1e28, radius: 4
+    classDef cashcow color: #0f62fe, radius: 5
 ```
 
 ### Example (Multi-line Labels — Hidden-Dot Overlay)
