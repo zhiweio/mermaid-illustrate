@@ -142,6 +142,427 @@ flowchart TD
 
 ---
 
+## Example Diagrams
+
+Here are four real-world diagrams for a **Customer Data Platform (CDP)** — all following the Blueprint design system.
+
+### 1. CDP Architecture — AWS + Snowflake Lakehouse
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#edf5ff','primaryTextColor':'#161616','primaryBorderColor':'#0f62fe','lineColor':'#697077','secondaryColor':'#d9fbfb','tertiaryColor':'#f2f4f8'}}}%%
+flowchart TD
+    subgraph Sources["🔷 Data Sources"]
+        App@{ img: "https://api.iconify.design/logos/aws.svg", label: "App Events", pos: "b", h: 44, constraint: "on" }
+        CRM@{ img: "https://api.iconify.design/logos/google-cloud.svg", label: "CRM / Ads", pos: "b", h: 44, constraint: "on" }
+        DB@{ img: "https://api.iconify.design/devicon/postgresql.svg", label: "RDBMS", pos: "b", h: 44, constraint: "on" }
+        API3rd@{ img: "https://api.iconify.design/logos/aws.svg", label: "3rd-party APIs", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Ingestion["🔷 Ingestion Layer"]
+        Kinesis@{ img: "https://api.iconify.design/logos/aws-kinesis.svg", label: "Kinesis Streams", pos: "b", h: 44, constraint: "on" }
+        Lambda@{ img: "https://api.iconify.design/logos/aws-lambda.svg", label: "Batch Ingestor", pos: "b", h: 44, constraint: "on" }
+        Glue@{ img: "https://api.iconify.design/logos/aws-glue.svg", label: "Glue ETL", pos: "b", h: 44, constraint: "on" }
+        Airflow@{ img: "https://api.iconify.design/logos/airflow-icon.svg", label: "Airflow DAGs", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Lakehouse["🔷 Lakehouse Core"]
+        S3R@{ img: "https://api.iconify.design/logos/aws-s3.svg", label: "S3 Raw Bronze", pos: "b", h: 44, constraint: "on" }
+        S3C@{ img: "https://api.iconify.design/logos/aws-s3.svg", label: "S3 Curated Silver", pos: "b", h: 44, constraint: "on" }
+        Snow@{ img: "https://api.iconify.design/logos/snowflake-icon.svg", label: "Snowflake Gold", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Serving["🔷 Serving & Analytics"]
+        RS@{ img: "https://api.iconify.design/logos/aws-redshift.svg", label: "Redshift", pos: "b", h: 44, constraint: "on" }
+        QS@{ img: "https://api.iconify.design/logos/aws-quicksight.svg", label: "QuickSight BI", pos: "b", h: 44, constraint: "on" }
+        ML@{ img: "https://api.iconify.design/logos/tensorflow.svg", label: "ML Pipeline", pos: "b", h: 44, constraint: "on" }
+        R_ETL@{ img: "https://api.iconify.design/logos/aws-step-functions.svg", label: "Reverse ETL", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Governance["🔷 Data Governance"]
+        GCat@{ img: "https://api.iconify.design/logos/aws-athena.svg", label: "Data Catalog", pos: "b", h: 44, constraint: "on" }
+        GLine@{ img: "https://api.iconify.design/logos/aws-lake-formation.svg", label: "Lake Formation", pos: "b", h: 44, constraint: "on" }
+        GQual@{ img: "https://api.iconify.design/logos/aws-glue.svg", label: "Quality Checks", pos: "b", h: 44, constraint: "on" }
+        GGloss@{ img: "https://api.iconify.design/logos/aws-dynamodb.svg", label: "Business Glossary", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Security["🔷 Security & Compliance"]
+        SecIAM@{ img: "https://api.iconify.design/logos/aws-iam.svg", label: "IAM & RBAC", pos: "b", h: 44, constraint: "on" }
+        SecKMS@{ img: "https://api.iconify.design/logos/aws-kms.svg", label: "KMS Encryption", pos: "b", h: 44, constraint: "on" }
+        SecAudit@{ img: "https://api.iconify.design/logos/aws-cloudtrail.svg", label: "CloudTrail Audit", pos: "b", h: 44, constraint: "on" }
+    end
+
+    subgraph Ops["🔷 Operations & Cost"]
+        OpsIaC@{ img: "https://api.iconify.design/logos/terraform-icon.svg", label: "Terraform IaC", pos: "b", h: 44, constraint: "on" }
+        OpsMon@{ img: "https://api.iconify.design/logos/aws-cloudwatch.svg", label: "Monitoring CW", pos: "b", h: 44, constraint: "on" }
+        OpsDR@{ img: "https://api.iconify.design/logos/aws-backup.svg", label: "Backup & DR", pos: "b", h: 44, constraint: "on" }
+    end
+
+    %% ===== primary data flow =====
+    App -->|Event Stream| Kinesis
+    CRM -->|Batch Sync| Lambda
+    DB -->|CDC Debezium| Glue
+    API3rd -->|Poll| Lambda
+    Kinesis --> S3R
+    Lambda --> S3R
+    Glue --> S3R
+    Airflow -.->|Schedule| Glue
+    Airflow -.->|Trigger| Lambda
+
+    S3R -->|Transform| S3C
+    S3C -->|Iceberg Load| Snow
+
+    Snow --> R_ETL
+    R_ETL -->|Sync| CRM
+    Snow -->|Query| RS
+    Snow -->|SPICE| QS
+    Snow -->|Features| ML
+    Snow -.->|Alerts| OpsMon
+
+    %% ===== governance & quality (dashed) =====
+    GCat -.->|Discover| S3R
+    GCat -.->|Discover| S3C
+    GCat -.->|Register| Snow
+    GLine -.->|Track Lineage| Glue
+    GLine -.->|Propagate Tags| S3C
+    GQual -.->|Validate| S3C
+    GQual -.->|SLI/SLO| Snow
+    GGloss -.->|Annotate| GCat
+
+    %% ===== security & compliance (dashed) =====
+    SecIAM -->|AuthZ| Kinesis
+    SecIAM -->|AuthZ| Lambda
+    SecIAM -->|AuthZ| Glue
+    SecIAM -->|AuthZ| Snow
+    SecKMS -->|Encrypt| S3R
+    SecKMS -->|Encrypt| S3C
+    SecKMS -->|Encrypt| Snow
+    SecAudit -.->|Log| Kinesis
+    SecAudit -.->|Log| Lambda
+    SecAudit -.->|Log| Glue
+
+    %% ===== operations & cost (dashed) =====
+    OpsIaC -.->|Provision| Kinesis
+    OpsIaC -.->|Provision| Glue
+    OpsIaC -.->|Provision| S3C
+    OpsIaC -.->|Provision| Snow
+    OpsMon -.->|Metrics| Kinesis
+    OpsMon -.->|Metrics| Glue
+    OpsMon -.->|Metrics| Snow
+    OpsDR -.->|Snapshot| S3R
+    OpsDR -.->|Snapshot| S3C
+    OpsDR -.->|Snapshot| Snow
+
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+    classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#525252
+    classDef bpInfo fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+
+    class Kinesis,Lambda,Glue,Airflow,ML,R_ETL bpProcess
+    class S3R,S3C,Snow,RS bpData
+    class App,CRM,DB,API3rd,QS bpExternal
+    class GCat,GLine,GQual,GGloss bpInfo
+    class OpsIaC,OpsMon,OpsDR bpSuccess
+    class SecIAM,SecKMS,SecAudit bpError
+
+    linkStyle 0 stroke:#0f62fe,stroke-width:2px
+    linkStyle 1 stroke:#0f62fe,stroke-width:2px
+    linkStyle 2 stroke:#0f62fe,stroke-width:2px
+    linkStyle 4 stroke:#007d79,stroke-width:2px,stroke-dasharray:5
+    linkStyle 5 stroke:#007d79,stroke-width:2px,stroke-dasharray:5
+    linkStyle 6 stroke:#007d79,stroke-width:2px,stroke-dasharray:5
+    linkStyle 10 stroke:#0f62fe,stroke-width:2.5px
+    linkStyle 11 stroke:#0f62fe,stroke-width:2.5px
+    linkStyle 12 stroke:#198038,stroke-width:2px
+```
+
+### 2. CDP Project Timeline
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#edf5ff','primaryTextColor':'#161616','primaryBorderColor':'#0f62fe','lineColor':'#697077','secondaryColor':'#d9fbfb','tertiaryColor':'#f2f4f8'}}}%%
+timeline
+    title Customer Data Platform — Project Timeline
+    section Foundation
+        Month 1 : Architecture Design : Team Onboarding : Infrastructure Provisioning
+        Month 2 : Data Source Inventory : Schema Design : Security Baseline
+    section Implementation
+        Month 3-4 : Ingestion Pipelines (Kinesis/Lambda) : Raw Data Lake (S3) : CDC Connectors
+        Month 5-6 : ETL Jobs (Glue) : Data Quality Framework : Curated Layer Build
+    section Integration
+        Month 7-8 : Snowflake Lakehouse Setup : Identity Resolution : Customer 360 Views
+        Month 9 : BI Integration (QuickSight) : Reverse ETL to CRM : ML Feature Store
+    section Optimization
+        Month 10 : Performance Tuning : Cost Optimization : Query Acceleration
+        Month 11 : Data Lineage Audit : DR & Backup Testing : Documentation
+    section Launch
+        Month 12 : Production Go-Live : SLA Monitoring : Handover & Training
+```
+
+### 3. CDP Solution Comparison — Quadrant Analysis
+
+```mermaid
+quadrantChart
+    title CDP Lakehouse Solutions — Complexity vs Capability
+    x-axis "Higher Maintenance" --> "Lower Maintenance"
+    y-axis "Limited Capabilities" --> "Comprehensive Capabilities"
+    quadrant-1 "Managed + Full-Featured"
+    quadrant-2 "Managed + Narrow"
+    quadrant-3 "Self-Managed + Narrow"
+    quadrant-4 "Self-Managed + Full-Featured"
+    "Databricks ": [0.65, 0.78] radius: 6, color: #f1c21b
+    "(Unity Catalog/MLflow)": [0.65, 0.745] radius: 0
+    "Snowflake ": [0.82, 0.88] radius: 6, color: #0f62fe
+    "(Snowpark/Cortex AI)": [0.82, 0.845] radius: 0
+    "Apache Ecosystem ": [0.16, 0.72] radius: 6, color: #198038
+    "(Iceberg+Spark+Trino)": [0.16, 0.685] radius: 0
+    "AWS RShift+S3 ": [0.35, 0.38] radius: 6, color: #697077
+    "(Spectrum/LakeFormation)": [0.35, 0.345] radius: 0
+```
+
+### 4. CDP Platform Focus Areas — Mindmap
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'mindmapRootColor':'#0f62fe','mindmapTextColor':'#ffffff','mindmapMainColor':'#1d3649','mindmapSecondaryColor':'#393939','mindmapLineColor':'#697077'}}}%%
+mindmap
+  root((Customer Data Platform))
+    Data Engineering
+      Ingestion Pipelines
+      Stream & Batch Processing
+      ETL/ELT Orchestration
+      CDC & Replication
+      Data Transformation dbt
+      Schema Evolution
+    Data Governance
+      Data Catalog & Discovery
+      Data Lineage Tracking
+      Metadata Management
+      Data Contracts
+      Glossary & Taxonomy
+      Access Control Policies
+    Data Quality
+      Validation Rules
+      Anomaly Detection
+      Freshness Monitoring
+      Completeness Checks
+      Consistency & Uniqueness
+      SLI/SLO Tracking
+    Security & Compliance
+      Encryption at Rest & Transit
+      IAM & RBAC
+      Audit Logging
+      PII Masking & Tokenization
+      GDPR/CCPA Compliance
+      Data Retention Policies
+    Data Storage & Architecture
+      Lakehouse Design Iceberg
+      Bronze / Silver / Gold
+      Partitioning Strategy
+      Storage Tiering Hot/Warm/Cold
+      Query Engine Selection
+      Data Modeling Star Schema
+    Data Serving & Analytics
+      BI Dashboards
+      Ad-hoc Query Layer
+      Reverse ETL to CRM
+      ML Feature Store
+      Real-time APIs
+      Self-Service Analytics
+    Operations & Observability
+      Pipeline Monitoring
+      Cost Observability
+      Alerting & Incident Response
+      Data Freshness SLAs
+      Job Scheduling DAGs
+      Capacity Planning
+    Cost Management
+      Storage Cost Optimization
+      Compute Right-Sizing
+      Warehouse Autoscaling
+      Data Lifecycle Management
+      Showback & Chargeback
+      Budget Governance
+```
+
+### 5. CDP Lakehouse — C4 Container Diagram
+
+```mermaid
+%%{init: {"c4": {"c4ShapeMargin": 65, "c4ShapePadding": 20, "diagramMarginX": 80, "diagramMarginY": 15, "boxMargin": 14, "wrapPadding": 6, "containerFontSize": 10, "container_dbFontSize": 10, "external_systemFontSize": 10, "personFontSize": 12, "messageFontSize": 9}}}%%
+C4Container
+    title Customer Data Platform on AWS — Container Diagram
+
+    Person(de, "Data Engineer", "Owns ingestion pipelines, ETL jobs, and data quality checks")
+    Person(da, "Data Analyst", "Creates dashboards and runs ad-hoc SQL against the curated layer")
+    Person(ds, "Data Scientist", "Trains ML models using feature stores and notebook experiments")
+
+    System_Boundary(cdp, "Customer Data Platform (AWS)") {
+        Container(kinesis, "Ingestion Stream", "Kinesis + Firehose", "Real-time events: 10 shards, 5 MB/s peak")
+        Container(lambda, "Batch Ingestor", "Lambda + SQS", "CRM exports, ad-platform reports, and third-party API polling")
+        Container(glue, "ETL Orchestrator", "Glue 4.0 + Spark", "Dedup, enrich, transform raw->curated via medallion")
+        Container(s3raw, "Raw Data Lake", "S3 + Parquet", "Bronze zone: immutable append-only, 90d then IA")
+        Container(s3curated, "Curated Data Lake", "S3 + Iceberg", "Silver zone: cleaned entities with schema evolution")
+        Container(snowflake, "Lakehouse Engine", "Snowflake Enterprise", "Gold zone: 360 views, aggregates, dimensional models")
+        Container(dbt, "Transformation", "dbt Core 1.8", "SQL models: staging->intermediate->marts in Snowflake")
+        Container(quicksight, "BI & Analytics", "QuickSight Enterprise", "Dashboards, SPICE datasets, embedded analytics")
+        Container(sagemaker, "ML Feature Store", "SageMaker", "Online/offline feature serving from gold layer")
+    }
+
+    System_Ext(crm, "CRM / Marketing", "Nightly CSV/JSON exports of profiles, campaigns, and segments")
+    System_Ext(rdbms, "Transactional DB", "CDC via Debezium to S3 raw zone")
+    System_Ext(apps, "App Events", "Real-time analytics stream via Amplitude/Segment")
+
+    Rel(de, kinesis, "Configures streams", "Kinesis API")
+    Rel(de, lambda, "Deploys functions", "Lambda Console")
+    Rel(de, glue, "Authors ETL jobs", "Glue Studio")
+    Rel(de, dbt, "Manages models", "dbt CLI")
+
+    Rel(da, quicksight, "Builds dashboards", "QuickSight")
+    Rel(da, snowflake, "Queries gold layer", "Snowflake SQL")
+
+    Rel(ds, sagemaker, "Trains models", "SageMaker SDK")
+    Rel(ds, snowflake, "Extracts datasets", "Data Wrangler")
+
+    Rel(kinesis, s3raw, "Writes batches", "Firehose")
+    Rel(lambda, s3raw, "Lands batches", "S3 PUT")
+    Rel(glue, s3raw, "Reads raw data", "Spark")
+    Rel(glue, s3curated, "Writes Iceberg", "S3 PUT")
+    Rel(s3curated, snowflake, "Registers tables", "Iceberg Catalog")
+    Rel(dbt, snowflake, "Executes models", "dbt adapter")
+    Rel(snowflake, quicksight, "Feeds SPICE", "JDBC")
+    Rel(snowflake, sagemaker, "Exports features", "COPY INTO")
+
+    Rel_Back(crm, lambda, "Nightly export", "S3 Transfer")
+    Rel_Back(rdbms, lambda, "CDC stream", "Debezium")
+    Rel_Back(apps, kinesis, "Event stream", "HTTP API")
+
+    UpdateElementStyle(de, $bgColor="#f2f4f8", $fontColor="#161616", $borderColor="#697077")
+    UpdateElementStyle(da, $bgColor="#f2f4f8", $fontColor="#161616", $borderColor="#697077")
+    UpdateElementStyle(ds, $bgColor="#f2f4f8", $fontColor="#161616", $borderColor="#697077")
+
+    UpdateElementStyle(kinesis, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+    UpdateElementStyle(lambda, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+    UpdateElementStyle(glue, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+    UpdateElementStyle(dbt, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+    UpdateElementStyle(quicksight, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+    UpdateElementStyle(sagemaker, $bgColor="#edf5ff", $fontColor="#161616", $borderColor="#0f62fe")
+
+    UpdateElementStyle(s3raw, $bgColor="#d9fbfb", $fontColor="#161616", $borderColor="#007d79")
+    UpdateElementStyle(s3curated, $bgColor="#d9fbfb", $fontColor="#161616", $borderColor="#007d79")
+    UpdateElementStyle(snowflake, $bgColor="#d9fbfb", $fontColor="#161616", $borderColor="#007d79")
+
+    UpdateElementStyle(crm, $bgColor="#f2f4f8", $fontColor="#697077", $borderColor="#dde1e6")
+    UpdateElementStyle(rdbms, $bgColor="#f2f4f8", $fontColor="#697077", $borderColor="#dde1e6")
+    UpdateElementStyle(apps, $bgColor="#f2f4f8", $fontColor="#697077", $borderColor="#dde1e6")
+
+    UpdateRelStyle(glue, s3curated, $textColor="#007d79", $lineColor="#007d79")
+    UpdateRelStyle(s3curated, snowflake, $textColor="#007d79", $lineColor="#007d79")
+    UpdateRelStyle(dbt, snowflake, $textColor="#007d79", $lineColor="#007d79")
+    UpdateRelStyle(snowflake, quicksight, $textColor="#0f62fe", $lineColor="#0f62fe")
+    UpdateRelStyle(snowflake, sagemaker, $textColor="#8a3ffc", $lineColor="#8a3ffc")
+
+    UpdateLayoutConfig($c4ShapeInRow="5", $c4BoundaryInRow="2")
+```
+
+### 6. CDP Project — Gantt Chart
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#edf5ff','primaryTextColor':'#161616','primaryBorderColor':'#0f62fe','lineColor':'#697077','secondaryColor':'#d9fbfb','tertiaryColor':'#f2f4f8'}}}%%
+gantt
+    title Customer Data Platform — Project Schedule
+    dateFormat YYYY-MM-DD
+    excludes weekends
+    tickInterval 1week
+    weekday monday
+
+    section Foundation
+    Architecture Design          :done,    arc,    2026-01-06, 2026-01-24
+    Infrastructure Provisioning  :done,    infra,  after arc, 2026-02-07
+    Data Source Inventory        :active,  ds_inv, after arc, 2026-02-21
+
+    section Implementation
+    Ingestion Pipelines          :         ingest, after infra, 2026-03-14
+    Raw Data Lake (S3)           :         raw,    after infra, 2026-03-21
+    ETL Jobs (Glue)              :         etl,    after ingest, 2026-04-11
+    Data Quality Framework       :         dq,     after etl, 2026-04-25
+
+    section Integration
+    Snowflake Lakehouse Setup    :         sf,     after etl, 2026-05-09
+    Identity Resolution          :         id,     after sf, 2026-05-23
+    Customer 360 Views           :         c360,   after id, 2026-06-06
+    BI Integration (QuickSight)  :         bi,     after c360, 2026-06-20
+
+    section Optimization
+    Performance Tuning           :         perf,   after bi, 2026-07-04
+    Cost Optimization            :         cost,   after perf, 2026-07-18
+    Data Lineage Audit           :         audit,  after cost, 2026-07-25
+
+    section Launch
+    Production Go-Live           :crit,    golive, after audit, 2026-08-08
+    SLA Monitoring               :         sla,    after golive, 2026-08-22
+    Handover & Training          :         train,  after golive, 2026-08-29
+
+    section Ongoing
+    Maintenance & Support        :         maint,  after train, 2026-09-30
+```
+
+### 7. CDP Ingestion Pipeline — Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant App as App Events
+    participant Kinesis as Kinesis
+    participant Lambda as Lambda Ingestor
+    participant Glue as Glue ETL
+    participant S3Raw as S3 Raw
+    participant S3Curated as S3 Curated
+    participant Snowflake as Snowflake
+
+    App->>+Kinesis: Emit clickstream event (1 KB, JSON)
+    Kinesis-->>-App: Shard ACK (seq-00281)
+
+    App->>+Kinesis: Emit page_view event (2 KB, JSON)
+    Kinesis-->>-App: Shard ACK (seq-00282)
+
+    loop Every 60s (Firehose flush)
+        Kinesis->>+S3Raw: Write Parquet batch (partition=dt=2026-06-21)
+        S3Raw-->>-Kinesis: 200 OK (obj: raw/ingestion/dt=2026-06-21/part-01.parquet)
+    end
+
+    Note over Lambda, S3Raw: Batch export nightly (02:00 UTC)
+
+    Lambda->>+S3Raw: PUT CRM export (Salesforce nightly dump)
+    S3Raw-->>-Lambda: 200 OK (obj: raw/crm/dt=2026-06-21/data.csv)
+
+    Lambda->>+S3Raw: PUT ad-platform report (Google Ads API)
+    S3Raw-->>-Lambda: 200 OK (obj: raw/ads/dt=2026-06-21/report.csv)
+
+    Note over Glue, S3Curated: Medallion transform (triggered by S3 event)
+
+    Glue->>+S3Raw: GET raw/ingestion/dt=2026-06-21/
+    S3Raw-->>-Glue: Parquet batch (10K rows, 5 MB)
+    Glue->>Glue: Dedup + Schema inference + Enrich
+
+    Glue->>+S3Curated: PUT Parquet via Iceberg (curated/events/)
+    S3Curated-->>-Glue: 200 OK (Iceberg commit: snapshot 8823)
+
+    Glue->>+S3Raw: GET raw/crm/dt=2026-06-21/
+    S3Raw-->>-Glue: CRM CSV (50K rows)
+
+    Glue->>+S3Curated: PUT Parquet via Iceberg (curated/profiles/)
+    S3Curated-->>-Glue: 200 OK (Iceberg commit: snapshot 8824)
+
+    Note over S3Curated, Snowflake: Iceberg table registration (hourly)
+
+    S3Curated->>+Snowflake: Iceberg metadata refresh (curated.events)
+    Snowflake-->>-S3Curated: Table refreshed (snapshot 8823 visible)
+
+    S3Curated->>+Snowflake: Iceberg metadata refresh (curated.profiles)
+    Snowflake-->>-S3Curated: Table refreshed (snapshot 8824 visible)
+```
+
+---
+
 ## Supported Agents / Platforms
 
 | Agent | Status | Notes |
