@@ -8,7 +8,7 @@ Instructions for AI coding agents working on this repository.
 
 This is an **AI Agent Skill** for creating Mermaid diagrams. It follows the [Agent Skills specification](https://agentskills.io) — a `SKILL.md` file with YAML frontmatter that agents discover and load on demand. The skill provides guidance for generating 23 types of Mermaid diagrams with a unified IBM Carbon Blueprint design system.
 
-- **Skill name**: `mermaid`
+- **Skill name**: `mermaid-illustrate`
 - **Entry point**: `SKILL.md`
 - **Reference material**: `examples/` (25 files, loaded on demand by agents)
 - **Design system**: Blueprint (IBM Carbon v11 + C4 model)

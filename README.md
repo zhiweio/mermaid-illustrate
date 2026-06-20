@@ -52,44 +52,39 @@ See [`examples/design-system.md`](examples/design-system.md) for the full specif
 ### Quick Install (ZCode / Claude Code)
 
 ```bash
-# Clone the repository
-git clone https://github.com/zhiweio/mermaid-illustrate-skills.git
-
-# Install as a skill (rename directory to match skill name)
-cp -r mermaid-illustrate-skills ~/.agents/skills/mermaid
+# Clone directly into the skills directory
+git clone https://github.com/zhiweio/mermaid-illustrate.git ~/.agents/skills/mermaid-illustrate
 ```
 
 Or install per-project:
 
 ```bash
-cp -r mermaid-illustrate-skills /path/to/your-project/.agents/skills/mermaid
+git clone https://github.com/zhiweio/mermaid-illustrate.git /path/to/your-project/.agents/skills/mermaid-illustrate
 ```
 
 ### Per-Agent Install Paths
 
 | Agent | Global Path | Project Path |
 |-------|------------|--------------|
-| **Claude Code / ZCode** | `~/.agents/skills/mermaid/` | `.agents/skills/mermaid/` |
-| **GitHub Copilot** | `~/.copilot/skills/mermaid/` | `.github/skills/mermaid/` |
-| **Cursor** | `~/.cursor/skills/mermaid/` | `.cursor/skills/mermaid/` |
-| **Codex CLI** | `~/.codex/skills/mermaid/` | `.codex/skills/mermaid/` |
-| **Gemini CLI** | `~/.gemini/skills/mermaid/` | `.gemini/skills/mermaid/` |
-| **Windsurf** | `~/.codeium/windsurf/skills/mermaid/` | `.windsurf/skills/mermaid/` |
-
-> ⚠️ **Important**: The installed directory MUST be named `mermaid` (matching the `name` field in `SKILL.md`). Do NOT keep the repo name `mermaid-illustrate-skills` as the skill directory name.
+| **Claude Code / ZCode** | `~/.agents/skills/mermaid-illustrate/` | `.agents/skills/mermaid-illustrate/` |
+| **GitHub Copilot** | `~/.copilot/skills/mermaid-illustrate/` | `.github/skills/mermaid-illustrate/` |
+| **Cursor** | `~/.cursor/skills/mermaid-illustrate/` | `.cursor/skills/mermaid-illustrate/` |
+| **Codex CLI** | `~/.codex/skills/mermaid-illustrate/` | `.codex/skills/mermaid-illustrate/` |
+| **Gemini CLI** | `~/.gemini/skills/mermaid-illustrate/` | `.gemini/skills/mermaid-illustrate/` |
+| **Windsurf** | `~/.codeium/windsurf/skills/mermaid-illustrate/` | `.windsurf/skills/mermaid-illustrate/` |
 
 ### Using CLI Installers
 
 ```bash
 # Vercel Skills CLI
-npx skills add zhiweio/mermaid-illustrate-skills
+npx skills add zhiweio/mermaid-illustrate
 
 # vskill
-npx vskill install zhiweio/mermaid-illustrate-skills
+npx vskill install zhiweio/mermaid-illustrate
 
 # Skilz (Python)
 pip install skilz
-skilz install zhiweio/mermaid-illustrate-skills
+skilz install zhiweio/mermaid-illustrate
 ```
 
 ---
@@ -165,7 +160,7 @@ flowchart TD
 ## Project Structure
 
 ```
-mermaid/
+mermaid-illustrate/
 ├── SKILL.md                    # Main skill definition (frontmatter + instructions)
 ├── README.md                   # This file — human-facing documentation
 ├── AGENTS.md                   # Workspace instructions for agents contributing to this repo
