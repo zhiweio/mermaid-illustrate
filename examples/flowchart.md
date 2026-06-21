@@ -12,7 +12,7 @@ classDef bpData     fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 classDef bpSuccess  fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 classDef bpError    fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
-classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#697077
+classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#525252
 classDef bpUser     fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
 classDef bpInfo     fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
 classDef bpGroup    fill:#f2f4f8,stroke:#dde1e6,stroke-width:1px,color:#393939
@@ -30,7 +30,7 @@ For links, apply semantic styling:
 - `linkStyle 1 stroke:#007d79,stroke-width:2px,stroke-dasharray:5` — data flow
 - `linkStyle 2 stroke:#da1e28,stroke-width:2px` — error path
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 
@@ -87,10 +87,10 @@ flowchart TD
     Success --> End([End])
     Error --> End
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Process bpProcess
     class Decision bpDecision
@@ -104,7 +104,7 @@ flowchart TD
 flowchart LR
     Start([Start]) --> Process[Process] --> End([End])
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Process bpProcess
 ```
 
@@ -127,9 +127,9 @@ flowchart TD
     M[\"Trapezoid Alt"/]
     N((("Double Circle")))
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 
     class A,C,D,F,J,K,L,M bpProcess
     class B,E,N bpData
@@ -144,7 +144,7 @@ flowchart TD
     Process1 -->|Step 2| Process2[Process 2]
     Process2 -->|Step 3| Result[Result]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Process1,Process2,Result bpProcess
 ```
 
@@ -171,7 +171,7 @@ flowchart TD
     E --> F
     G --> End
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class B,D,E,F,G bpProcess
 ```
 
@@ -194,8 +194,8 @@ flowchart TD
     A[Start] --> B[Process]
     B --> C[End]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 
     class A,C bpSuccess
     class B bpProcess
@@ -205,12 +205,11 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Start]:::bpStart --> B[Process]:::bpProcess
-    B --> C[End]:::bpEnd
+    A[Start]:::bpProcess --> B[Process]:::bpProcess
+    B --> C[End]:::bpSuccess
 
-    classDef bpStart fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpEnd fill:#defbe6,stroke:#198038,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 ```
 
 ### Example (With Dotted Links)
@@ -222,9 +221,9 @@ flowchart TD
     Alt -.->|Optional| Fallback[Fallback]
     Fallback -.-> Success
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 
     class Primary,Alt bpProcess
     class Success bpSuccess
@@ -238,7 +237,7 @@ flowchart TD
     A[Start] ==> B[Critical Process]
     B ==>|Critical| C[End]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class A,B,C bpProcess
 ```
 
@@ -258,10 +257,10 @@ flowchart TD
     Save --> End
     Error --> End
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Validate,Process,Save bpProcess
     class Input,Check bpDecision
@@ -283,8 +282,8 @@ flowchart TD
     E --> F
     F --> G[End]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 
     class A,C,D,E,F,G bpProcess
     class B bpDecision
@@ -302,7 +301,7 @@ flowchart TD
     linkStyle 1 stroke:#697077,stroke-width:1.5px
     linkStyle 2 stroke:#198038,stroke-width:2px
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class A,B,C,D bpProcess
 ```
 
@@ -319,10 +318,10 @@ flowchart TD
     B --> C
     C --> D
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-    classDef bpInfo fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+    classDef bpInfo fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
 
     class A bpProcess
     class B bpDecision
@@ -343,7 +342,7 @@ flowchart LR
     e1@{ curve: stepBefore }
     e2@{ curve: stepAfter }
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class A,B,C bpProcess
 ```
 
@@ -401,9 +400,9 @@ flowchart TD
     Order --> Search
     Pay --> DB
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-    classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#697077
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+    classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#525252
 
     class CDN,Client,GW,Auth,User,Order,Pay,Notify bpProcess
     class DB,Cache,Queue,Search bpData
@@ -427,10 +426,10 @@ flowchart LR
     Monitor -->|OK| Done([Done])
     Monitor -->|Fail| Rollback
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpDecision fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Code,Build,Lint,DeployStg,DeployProd,Monitor bpProcess
     class Test,E2E bpDecision

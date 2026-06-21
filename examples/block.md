@@ -10,7 +10,7 @@ Block diagrams use `style` and the standard Blueprint classDef equivalent inline
 style BlockName fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
 ```
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 

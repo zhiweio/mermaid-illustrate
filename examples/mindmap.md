@@ -246,6 +246,6 @@ flowchart TD
     A --> C
     A --> D
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Root,A,B,C,D bpProcess
 ```

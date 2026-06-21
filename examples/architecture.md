@@ -2,7 +2,7 @@
 
 Architecture diagrams are used to show the relationship between services and resources commonly found within the Cloud or CI/CD deployments. In an architecture diagram, services (nodes) are connected by edges. Related services can be placed within groups to better illustrate how they are organized.
 
-**⚠️ Important Compatibility Note**: `architecture-beta` requires Mermaid v11.1.0 or higher. If your rendering environment doesn't support this diagram type (you'll see "No diagram type detected" error), please use the **Flowchart alternatives** provided below each example, which are compatible with all Mermaid versions.
+**Important Compatibility Note**: `architecture-beta` requires Mermaid v11.1.0 or higher. If your rendering environment doesn't support this diagram type (you'll see "No diagram type detected" error), please use the **Flowchart alternatives** provided below each example, which are compatible with all Mermaid versions.
 
 ### Blueprint Styling
 
@@ -75,8 +75,8 @@ flowchart TD
     end
     Server --> Database
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class Server bpProcess
     class Database bpData
@@ -105,8 +105,8 @@ flowchart LR
     DB --> Server
     Server --> Gateway
 
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
 
     class DB bpData
     class Server,Gateway bpProcess
@@ -141,8 +141,8 @@ flowchart TD
     Web --> API
     API --> DB
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class Web,API bpProcess
     class DB bpData
@@ -173,8 +173,8 @@ flowchart TD
     Server --> DB1
     Server --> DB2
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class Server bpProcess
     class DB1,DB2 bpData
@@ -205,7 +205,7 @@ flowchart TD
     end
     Server --> Subnet
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Server,Subnet bpProcess
 ```
 
@@ -253,8 +253,8 @@ flowchart TD
     App2 --> DB
     DB --> Storage
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class Gateway,LB,App1,App2 bpProcess
     class DB,Storage bpData
@@ -311,8 +311,8 @@ flowchart TD
     App1 --> DB1
     CDNSvc --> App2
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class Gateway,LB,App1,App2,CDNSvc bpProcess
     class DB1,Cache bpData

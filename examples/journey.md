@@ -132,6 +132,6 @@ flowchart TD
     Payment --> Confirm[Order Confirmation]
     Confirm --> End[End]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Browse,Select,Cart,Checkout,Payment,Confirm bpProcess
 ```

@@ -14,7 +14,7 @@ box rgb(255,241,241) Error       — Blueprint Error
 
 For participant coloring, use inline styling where the renderer supports it, or document the semantic role in the participant label.
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 

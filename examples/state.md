@@ -7,15 +7,15 @@ State diagrams show the different states of an object and the transitions betwee
 State diagrams use `classDef` + `class` for semantic coloring:
 
 ```
-classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
-classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
+classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
+classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 ```
 
 Apply to states by their ID: `class StateName bpProcess`
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 
@@ -47,9 +47,9 @@ stateDiagram-v2
     Error --> Idle : Retry
     Completed --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Idle,Processing bpProcess
     class Completed bpSuccess
@@ -71,8 +71,8 @@ stateDiagram-v2
         Stationary --> [*]
     }
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Still,Moving,Stationary bpProcess
     class Crash bpError
@@ -89,8 +89,8 @@ stateDiagram-v2
     Running --> Stopped : Stop Event
     Stopped --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 
     class Idle,Running,Paused bpProcess
     class Stopped bpSuccess
@@ -118,7 +118,7 @@ stateDiagram-v2
 
     Second --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class First,Second bpProcess
 ```
 
@@ -135,8 +135,8 @@ stateDiagram-v2
 
     state Choice1 <<choice>>
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 
     class State1,State2,State3 bpProcess
     class State2 bpSuccess
@@ -160,7 +160,7 @@ stateDiagram-v2
     state Join1 <<join>>
     Join1 --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class State1,State2,State3 bpProcess
 ```
 
@@ -176,8 +176,8 @@ stateDiagram-v2
     note right of Processing : Critical state — timeout after 30s
     note left of Idle : Initial state — always reachable
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
 
     class Idle,Processing bpProcess
     class Completed bpSuccess
@@ -201,7 +201,7 @@ stateDiagram-v2
     State5 --> State3
     State3 --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class State1,State2,State3,State4,State5,Parallel1,Parallel2 bpProcess
 ```
 
@@ -214,7 +214,7 @@ stateDiagram-v2
     State1 --> State2 : Event
     State2 --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class State1,State2 bpProcess
 ```
 
@@ -237,10 +237,10 @@ stateDiagram-v2
     Refunded --> [*]
     Lost --> [*]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
-    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
+    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
 
     class Created,Confirmed,Paid,Shipped bpProcess
     class Delivered bpSuccess
@@ -261,9 +261,9 @@ flowchart TD
     Error -->|Retry| Idle
     Completed --> End([End])
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class Idle,Processing bpProcess
     class Completed bpSuccess

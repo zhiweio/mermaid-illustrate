@@ -175,9 +175,9 @@ flowchart TD
     R1 -->|satisfies| E1
     R2 -->|satisfies| E1
 
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
-    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
+    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
 
     class R1 bpError
     class R2 bpWarning

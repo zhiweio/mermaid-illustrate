@@ -8,7 +8,7 @@ Kanban uses built-in metadata styling. Apply Blueprint semantics in priority val
 
 ### Syntax
 
-- Use `kanban` keyword (requires Mermaid v11.4.0+, experimental feature 🔥)
+- Use `kanban` keyword (requires Mermaid v11.4.0+, experimental)
 - Columns: `columnId[Column Title]` - Each column has a unique identifier and title
 - Tasks: `taskId[Task Description]` - Tasks are indented under their column
 - Metadata: `@{assigned: "name", ticket: "TICKET-123", priority: "High"}` (optional)
@@ -68,6 +68,6 @@ flowchart LR
     ToDo --> InProgress
     InProgress --> Done
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class T1,T2,T3,T4 bpProcess
 ```

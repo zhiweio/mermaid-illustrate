@@ -179,6 +179,6 @@ flowchart LR
     Phase2 --> Phase3[Phase 3: Testing]
     Phase3 --> End[Deployment]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Start,Phase1,Phase2,Phase3,End bpProcess
 ```

@@ -2,13 +2,13 @@
 
 > **AI Agent Skill** — Professional Mermaid diagrams with the IBM Carbon Blueprint design system.
 
-A comprehensive, production-grade skill for AI coding agents (Claude Code, ZCode, GitHub Copilot, Cursor, and more) to create 23 types of Mermaid diagrams with a unified, semantic, dark-mode-ready visual language based on IBM Carbon Design System v11.
+A comprehensive skill for AI coding agents to create 23 types of Mermaid diagrams with a unified, semantic, dark-mode-ready visual language based on IBM Carbon Design System v11.
 
 ---
 
 ## What This Skill Does
 
-- Creates **23 types** of Mermaid diagrams: flowcharts, sequence diagrams, class diagrams, state machines, ER diagrams, user journeys, Gantt charts, pie charts, quadrant charts, requirement diagrams, Git graphs, C4 architecture diagrams, mindmaps, timelines, ZenUML, Sankey diagrams, XY charts, block diagrams, packet diagrams, Kanban boards, architecture diagrams, radar charts, and treemaps.
+- Creates **23 types** of Mermaid diagrams: flowcharts, sequence, class, state, ER, user journey, Gantt, pie, quadrant, requirement, Git graph, C4, mindmap, timeline, ZenUML, Sankey, XY chart, block, packet, Kanban, architecture, radar, and treemap.
 - Applies the **Blueprint design system** — semantic IBM Carbon v11 colors that carry meaning before labels are read.
 - Supports **600+ icons** across 6 icon sets (logos, devicon, gcp, vscode-icons, codicon, skill-icons) with smart syntax selection.
 - Handles **dark-mode** and **light-mode** automatically.
@@ -144,54 +144,54 @@ flowchart TD
 
 ## Example Diagrams
 
-Here are four real-world diagrams for a **Customer Data Platform (CDP)** — all following the Blueprint design system.
+Here are seven real-world diagrams for a **Customer Data Platform (CDP)** — all following the Blueprint design system.
 
 ### 1. CDP Architecture — AWS + Snowflake Lakehouse
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'primaryColor':'#edf5ff','primaryTextColor':'#161616','primaryBorderColor':'#0f62fe','lineColor':'#697077','secondaryColor':'#d9fbfb','tertiaryColor':'#f2f4f8'}}}%%
 flowchart TD
-    subgraph Sources["🔷 Data Sources"]
+    subgraph Sources["Data Sources"]
         App@{ img: "https://api.iconify.design/logos/aws.svg", label: "App Events", pos: "b", h: 44, constraint: "on" }
         CRM@{ img: "https://api.iconify.design/logos/google-cloud.svg", label: "CRM / Ads", pos: "b", h: 44, constraint: "on" }
         DB@{ img: "https://api.iconify.design/devicon/postgresql.svg", label: "RDBMS", pos: "b", h: 44, constraint: "on" }
         API3rd@{ img: "https://api.iconify.design/logos/aws.svg", label: "3rd-party APIs", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Ingestion["🔷 Ingestion Layer"]
+    subgraph Ingestion["Ingestion Layer"]
         Kinesis@{ img: "https://api.iconify.design/logos/aws-kinesis.svg", label: "Kinesis Streams", pos: "b", h: 44, constraint: "on" }
         Lambda@{ img: "https://api.iconify.design/logos/aws-lambda.svg", label: "Batch Ingestor", pos: "b", h: 44, constraint: "on" }
         Glue@{ img: "https://api.iconify.design/logos/aws-glue.svg", label: "Glue ETL", pos: "b", h: 44, constraint: "on" }
         Airflow@{ img: "https://api.iconify.design/logos/airflow-icon.svg", label: "Airflow DAGs", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Lakehouse["🔷 Lakehouse Core"]
+    subgraph Lakehouse["Lakehouse Core"]
         S3R@{ img: "https://api.iconify.design/logos/aws-s3.svg", label: "S3 Raw Bronze", pos: "b", h: 44, constraint: "on" }
         S3C@{ img: "https://api.iconify.design/logos/aws-s3.svg", label: "S3 Curated Silver", pos: "b", h: 44, constraint: "on" }
         Snow@{ img: "https://api.iconify.design/logos/snowflake-icon.svg", label: "Snowflake Gold", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Serving["🔷 Serving & Analytics"]
+    subgraph Serving["Serving & Analytics"]
         RS@{ img: "https://api.iconify.design/logos/aws-redshift.svg", label: "Redshift", pos: "b", h: 44, constraint: "on" }
         QS@{ img: "https://api.iconify.design/logos/aws-quicksight.svg", label: "QuickSight BI", pos: "b", h: 44, constraint: "on" }
         ML@{ img: "https://api.iconify.design/logos/tensorflow.svg", label: "ML Pipeline", pos: "b", h: 44, constraint: "on" }
         R_ETL@{ img: "https://api.iconify.design/logos/aws-step-functions.svg", label: "Reverse ETL", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Governance["🔷 Data Governance"]
+    subgraph Governance["Data Governance"]
         GCat@{ img: "https://api.iconify.design/logos/aws-athena.svg", label: "Data Catalog", pos: "b", h: 44, constraint: "on" }
         GLine@{ img: "https://api.iconify.design/logos/aws-lake-formation.svg", label: "Lake Formation", pos: "b", h: 44, constraint: "on" }
         GQual@{ img: "https://api.iconify.design/logos/aws-glue.svg", label: "Quality Checks", pos: "b", h: 44, constraint: "on" }
         GGloss@{ img: "https://api.iconify.design/logos/aws-dynamodb.svg", label: "Business Glossary", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Security["🔷 Security & Compliance"]
+    subgraph Security["Security & Compliance"]
         SecIAM@{ img: "https://api.iconify.design/logos/aws-iam.svg", label: "IAM & RBAC", pos: "b", h: 44, constraint: "on" }
         SecKMS@{ img: "https://api.iconify.design/logos/aws-kms.svg", label: "KMS Encryption", pos: "b", h: 44, constraint: "on" }
         SecAudit@{ img: "https://api.iconify.design/logos/aws-cloudtrail.svg", label: "CloudTrail Audit", pos: "b", h: 44, constraint: "on" }
     end
 
-    subgraph Ops["🔷 Operations & Cost"]
+    subgraph Ops["Operations & Cost"]
         OpsIaC@{ img: "https://api.iconify.design/logos/terraform-icon.svg", label: "Terraform IaC", pos: "b", h: 44, constraint: "on" }
         OpsMon@{ img: "https://api.iconify.design/logos/aws-cloudwatch.svg", label: "Monitoring CW", pos: "b", h: 44, constraint: "on" }
         OpsDR@{ img: "https://api.iconify.design/logos/aws-backup.svg", label: "Backup & DR", pos: "b", h: 44, constraint: "on" }

@@ -25,11 +25,11 @@ Quadrant charts support per-point `color`, `stroke-color`, `stroke-width`, and p
 - **Multi-line data-point labels (hidden-dot overlay)**: `quadrantChart` natively does NOT support manual line breaks (`<br>`/`\n` are ignored in point labels). To split a point's text across multiple lines, stack additional points at the same X with the Y offset by a **fixed delta of `0.035`** and set their `radius: 0` (hides the dot) so only the text shows — visually faking a multi-line label.
 
 ```
-"主标签 ": [x, y]
-"副标签": [x, y - 0.035] radius: 0
+"Primary Label ": [x, y]
+"Sub-label": [x, y - 0.035] radius: 0
 ```
 
-> 固定高差使用 `0.035`（小于此值副标签会与主标签重叠；大于此值行距过宽）。主标签末尾留一个空格以与副标签对齐。
+> Use the fixed delta of `0.035` (values below this cause the sub-label to overlap the primary; values above create excessive line spacing). Append a trailing space to the primary label so it aligns with the sub-label.
 
 Reference: [Mermaid Quadrant Chart Documentation](https://mermaid.ai/open-source/syntax/quadrantChart.html)
 
@@ -112,7 +112,7 @@ quadrantChart
 
 ### Example (Multi-line Labels — Hidden-Dot Overlay)
 
-`quadrantChart` does not support line breaks in point labels. Use the hidden-dot overlay technique: each副标签 is a second point at the same X, Y offset by `-0.035`, with `radius: 0` so only its text renders.
+`quadrantChart` does not support line breaks in point labels. Use the hidden-dot overlay technique: each sub-label is a second point at the same X, Y offset by `-0.035`, with `radius: 0` so only its text renders.
 
 ```mermaid
 quadrantChart
@@ -154,10 +154,10 @@ flowchart TD
         D[Feature D]
     end
 
-    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px
-    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px
+    classDef bpSuccess fill:#defbe6,stroke:#198038,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpWarning fill:#fcf4d6,stroke:#f1c21b,stroke-width:2px,color:#161616
+    classDef bpError fill:#fff1f1,stroke:#da1e28,stroke-width:2px,color:#161616
 
     class A bpSuccess
     class B bpProcess

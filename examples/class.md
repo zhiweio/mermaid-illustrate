@@ -7,15 +7,15 @@ Class diagrams represent the structure of a system by showing classes, their att
 Class diagrams use `cssClass` for styling (note the different function name vs. flowchart's `class`):
 
 ```
-classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-classDef bpInterface fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px
-classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
+classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+classDef bpInterface fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
+classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
 ```
 
 Apply with `cssClass "ClassName" className`.
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 
@@ -69,8 +69,8 @@ classDiagram
     Animal <|-- Dog
     Animal <|-- Cat
 
-    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
 
     cssClass "Animal" bpAbstract
     cssClass "Dog,Cat" bpProcess
@@ -94,7 +94,7 @@ classDiagram
 
     Customer --> BankAccount : owns
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "BankAccount,Customer" bpProcess
 ```
 
@@ -109,7 +109,7 @@ classDiagram
         +divide(a, b) double
     }
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "Calculator" bpProcess
 ```
 
@@ -127,7 +127,7 @@ classDiagram
         +get(key K) V
     }
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "List,Map" bpProcess
 ```
 
@@ -153,8 +153,8 @@ classDiagram
     Car *-- Engine
     Car o-- Wheel
 
-    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "Vehicle" bpAbstract
     cssClass "Car,Engine,Wheel" bpProcess
 ```
@@ -173,7 +173,7 @@ classDiagram
 
     Company "1" --> "1..*" Employee : employs
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "Company,Employee" bpProcess
 ```
 
@@ -201,8 +201,8 @@ classDiagram
     Shape <|.. Circle
     Shape <|.. Rectangle
 
-    classDef bpInterface fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpInterface fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "Shape" bpInterface
     cssClass "Circle,Rectangle" bpProcess
 ```
@@ -228,9 +228,9 @@ classDiagram
         PENDING
     }
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
-    classDef bpInfo fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
+    classDef bpInfo fill:#f6f2ff,stroke:#8a3ffc,stroke-width:2px,color:#161616
     cssClass "UserService" bpProcess
     cssClass "AbstractRepository" bpAbstract
     cssClass "Status" bpInfo
@@ -252,7 +252,7 @@ classDiagram
     User --> UserService
     Product --> ProductService
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "User,Product,UserService,ProductService" bpProcess
 ```
 
@@ -270,8 +270,8 @@ classDiagram
     }
     Animal <|-- Dog
 
-    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     cssClass "Animal" bpAbstract
     cssClass "Dog" bpProcess
 ```
@@ -308,9 +308,9 @@ classDiagram
     Course "1" --> "0..*" Enrollment : has
     Student "1" --> "0..*" Enrollment : receives
 
-    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpAbstract fill:#f2f4f8,stroke:#697077,stroke-width:2px,color:#161616
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     cssClass "Person" bpAbstract
     cssClass "Student,Teacher,Course" bpProcess
@@ -330,6 +330,6 @@ flowchart TD
     Animal -->|inherits| Dog
     Animal -->|inherits| Cat
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Animal,Dog,Cat bpProcess
 ```

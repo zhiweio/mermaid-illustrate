@@ -8,7 +8,7 @@ Sankey diagrams have limited styling support. Use the flowchart alternative for 
 
 ### Syntax
 
-- Use `sankey` keyword (requires Mermaid v10.3.0+, experimental feature 🔥)
+- Use `sankey` keyword (requires Mermaid v10.3.0+, experimental)
 - Format: CSV style with exactly **3 columns**: `Source,Target,Value`
 - Each line represents one flow: `source,target,value`
 - **Empty lines are allowed** (for visual separation, without comma separators)
@@ -76,8 +76,8 @@ flowchart LR
     H -->|25| R
     H -->|5| I
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpData fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
 
     class EP bpProcess
     class E,H bpData

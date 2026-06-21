@@ -7,12 +7,12 @@ Entity Relationship (ER) diagrams represent the structure of a database, showing
 ER diagrams use `classDef` + `class` with entity names:
 
 ```
-classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px
-classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#697077
+classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
+classDef bpExternal fill:#f2f4f8,stroke:#dde1e6,stroke-width:2px,color:#525252
 ```
 
-Reference: `examples/design-system.md` for the complete Blueprint specification.
+See `examples/design-system.md` for the canonical palette, classDef templates, and themeVariables.
 
 ### Syntax
 
@@ -46,7 +46,7 @@ erDiagram
     ORDER ||--|{ LINE-ITEM : contains
     PRODUCT ||--|{ LINE-ITEM : "ordered in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class CUSTOMER,ORDER,PRODUCT,LINE-ITEM bpEntity
 ```
 
@@ -76,7 +76,7 @@ erDiagram
     ORDER ||--|{ LINE-ITEM : contains
     PRODUCT ||--|{ LINE-ITEM : "ordered in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class CUSTOMER,ORDER,PRODUCT bpEntity
 ```
 
@@ -88,7 +88,7 @@ erDiagram
     ROOM ||--o{ WINDOW : has
     BUILDING ||--o{ PROPERTY : "located in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class PROPERTY,ROOM,WINDOW,BUILDING bpEntity
 ```
 
@@ -100,8 +100,8 @@ erDiagram
     PERSON ||--o{ NAMED-DRIVER : "is"
     CAR ||--o{ NAMED-DRIVER : "drives"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
     class PERSON,CAR bpEntity
     class NAMED-DRIVER bpJoin
 ```
@@ -114,7 +114,7 @@ erDiagram
     ORDER ||--|{ LINE-ITEM[Item] : contains
     PRODUCT[Prod] ||--|{ LINE-ITEM : "ordered in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class CUSTOMER,ORDER,PRODUCT,LINE-ITEM bpEntity
 ```
 
@@ -137,7 +137,7 @@ erDiagram
     }
     USER ||--o{ POST : "writes"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class USER,POST bpEntity
 ```
 
@@ -150,7 +150,7 @@ erDiagram
     ORDER ||--|{ LINE-ITEM : contains
     PRODUCT ||--|{ LINE-ITEM : "ordered in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class CUSTOMER,ORDER,PRODUCT,LINE-ITEM bpEntity
 ```
 
@@ -199,8 +199,8 @@ erDiagram
     POST ||--o{ POST_TAG : "tagged with"
     TAG ||--o{ POST_TAG : "used in"
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
-    classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
+    classDef bpJoin fill:#d9fbfb,stroke:#007d79,stroke-width:2px,color:#161616
     class USER,POST,COMMENT,CATEGORY,TAG bpEntity
     class POST_TAG bpJoin
 ```
@@ -220,6 +220,6 @@ flowchart TD
     ORDER -->|contains| LINE_ITEM
     PRODUCT -->|ordered in| LINE_ITEM
 
-    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpEntity fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class CUSTOMER,ORDER,PRODUCT,LINE_ITEM bpEntity
 ```

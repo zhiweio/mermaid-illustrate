@@ -1,70 +1,72 @@
-## Icon Catalog — 图标速查目录
-
-本文件是所有 Mermaid 图表演示中可用的图标速查目录。基于 [Iconify](https://iconify.design/) 统一图标体系，精选 6 个 icon set 实现技术绘图全覆盖。
-
-### Icon Set 速览
-
-| Icon Set | 前缀 | 数量 | Palette | 定位 | 何时使用 |
-|----------|------|------|---------|------|---------|
-| **logos** | `logos` | 1,861 | ✓ | 产品/云服务 Logo | 云厂商、SaaS、开源项目 Logo |
-| **devicon** | `devicon` | 1,036 | ✓ | 编程语言/工具/框架 | 技术栈图标，覆盖最广 |
-| **gcp** | `gcp` | 214 | ✓ | Google Cloud 服务图标 | Google Cloud 各服务专用图标 |
-| **vscode-icons** | `vscode-icons` | 1,513 | ✓ | 文件类型图标 | 文件/技术栈的 file-type 图标，命名规范 |
-| **codicon** | `codicon` | 602 | ✗ | IDE/开发操作概念 | Git、终端、调试、文件操作 |
-| **skill-icons** | `skill-icons` | 400 | ✓ | 编程技能图标 | 需 light/dark 主题变体时 |
-
-### 图标查找决策树
-
-绘制图表时，按以下优先级选择 icon set：
-
+## Icon Catalog
+ 
+The quick-reference catalog for all icons available in Mermaid diagrams. Built on the unified [Iconify](https://iconify.design/) icon system, with 6 curated icon sets for full technical-drawing coverage.
+ 
+This is the **single source of truth** for icon-pack registration and icon references. Do not duplicate the registration snippet in other files — reference this one instead.
+ 
+### Icon sets at a glance
+ 
+| Icon set | Prefix | Count | Palette | Purpose | When to use |
+|----------|--------|-------|---------|---------|-------------|
+| **logos** | `logos` | 1,861 | Yes | Product / cloud-service logos | Cloud vendors, SaaS, open-source project logos |
+| **devicon** | `devicon` | 1,036 | Yes | Languages / tools / frameworks | Tech-stack icons; widest coverage |
+| **gcp** | `gcp` | 214 | Yes | Google Cloud service icons | Dedicated icons for each GCP service |
+| **vscode-icons** | `vscode-icons` | 1,513 | Yes | File-type icons | File / tech-stack file-type icons; consistent naming |
+| **codicon** | `codicon` | 602 | No | IDE / dev-operation concepts | Git, terminal, debug, file operations |
+| **skill-icons** | `skill-icons` | 400 | Yes | Programming-skill icons | When light/dark theme variants are needed |
+ 
+### Icon lookup decision tree
+ 
+When drawing diagrams, choose an icon set by this priority:
+ 
 ```
-需要云服务/产品 Logo？
-├── Google Cloud 服务图标？ → gcp（最全，214 个服务专用图标）
-├── 其他云服务/产品 → logos（首选）或 devicon
-└── 需要编程语言/框架/工具？
-    ├── 需要文件类型图标（file-type-python、file-type-docker）？ → vscode-icons（命名规范，1,513 个）
-    ├── 其他技术栈 → devicon（首选）或 skill-icons
-    └── 需要 IDE/开发操作概念（Git、Terminal、Debug）？
-        ├── 是 → codicon
-        └── 不确定 → 搜索: https://api.iconify.design/search?query={keyword}&prefixes=logos,devicon,gcp,vscode-icons,codicon,skill-icons
-
-🚫 **严禁 Emoji**: 所有图表中禁止使用 emoji 表情符号。始终使用本目录中的图标或语义着色来传达含义。
+Need a cloud-service / product logo?
+├── Google Cloud service icon? → gcp (most complete, 214 dedicated service icons)
+├── Other cloud service / product → logos (preferred) or devicon
+└── Need a language / framework / tool?
+    ├── Need a file-type icon (file-type-python, file-type-docker)? → vscode-icons (consistent naming, 1,513 icons)
+    ├── Other tech stack → devicon (preferred) or skill-icons
+    └── Need an IDE / dev-operation concept (Git, Terminal, Debug)?
+        ├── Yes → codicon
+        └── Unsure → search: https://api.iconify.design/search?query={keyword}&prefixes=logos,devicon,gcp,vscode-icons,codicon,skill-icons
+ 
+Prohibited — emoji: emoji is strictly prohibited in all diagrams. Always use the icons in this catalog or semantic coloring to convey meaning.
 ```
-
-### 图标使用语法（按注册状态选择）
-
-**核心决策规则**：根据渲染环境是否已注册图标包，选择对应语法。**同一张图中不要混用两种语法。**
-
-**已注册图标包** → 使用 icon-pack 语法（推荐）：
+ 
+### Icon syntax (by registration state)
+ 
+**Core decision rule**: choose syntax by whether the render environment has registered icon packs. **Do not mix the two syntaxes in one diagram.**
+ 
+**Icon packs registered** → use icon-pack syntax (recommended):
 ```
 %% flowchart
 NodeName@{ icon: "logos:aws-ec2", form: "square", label: "EC2", pos: "b", h: 48 }
-
+ 
 %% architecture-beta
 service ec2(logos:aws-ec2)[EC2]
 ```
-
-**未注册图标包** → 使用远程 URL 兜底（兼容所有环境）：
+ 
+**Icon packs NOT registered** → use remote-URL fallback (works in every environment):
 ```
 NodeName@{ img: "https://api.iconify.design/logos/aws-ec2.svg", label: "EC2", pos: "b", h: 48, constraint: "on" }
 ```
-
-**API URL 模式**（远程兜底用）：
+ 
+**API URL pattern** (for the remote fallback):
 ```
 https://api.iconify.design/{prefix}/{icon-name}.svg
 ```
-
-> ⚠️ **防变形铁律**：只设 `h`，开 `constraint: "on"`，绝不同时设 `w` 和 `h`。
-
+ 
+> **Anti-distortion rule**: set only `h`, enable `constraint: "on"`; never set both `w` and `h` simultaneously.
+ 
 ---
-
-## 1. 云服务 (Cloud Providers)
-
+ 
+## 1. Cloud Providers
+ 
 ### 1.1 AWS
-
-| 服务 | icon-pack 引用 | SVG URL | 宽高比 |
-|------|---------------|---------|--------|
-| AWS (通用) | `logos:aws` | `https://api.iconify.design/logos/aws.svg` | — |
+ 
+| Service | icon-pack reference | SVG URL | Aspect ratio |
+|---------|---------------------|---------|--------------|
+| AWS (generic) | `logos:aws` | `https://api.iconify.design/logos/aws.svg` | — |
 | API Gateway | `logos:aws-api-gateway` | `https://api.iconify.design/logos/aws-api-gateway.svg` | 1:1 |
 | AppFlow | `logos:aws-appflow` | `https://api.iconify.design/logos/aws-appflow.svg` | 1:1 |
 | App Mesh | `logos:aws-app-mesh` | `https://api.iconify.design/logos/aws-app-mesh.svg` | 1:1 |
@@ -128,15 +130,15 @@ https://api.iconify.design/{prefix}/{icon-name}.svg
 | Amplify | `logos:aws-amplify` | `https://api.iconify.design/logos/aws-amplify.svg` | 1:1 |
 | CodeStar | `logos:aws-codestar` | `https://api.iconify.design/logos/aws-codestar.svg` | 1:1 |
 | DynamoDB (devicon) | `devicon:dynamodb` | `https://api.iconify.design/devicon/dynamodb.svg` | 1:1 |
-
+ 
 ### 1.2 Google Cloud
-
-`gcp` 图标集提供 214 个 GCP 服务专用图标，命名最完整；`logos`/`devicon` 仅提供通用云图标。
-
-**`gcp:` 服务图标**（推荐用于 GCP 服务级图标）：
-
-| 服务 | icon-pack 引用 | SVG URL |
-|------|---------------|---------|
+ 
+The `gcp` set provides 214 dedicated GCP service icons with the most complete naming; `logos`/`devicon` only offer generic cloud icons.
+ 
+**`gcp:` service icons** (recommended for GCP service-level icons):
+ 
+| Service | icon-pack reference | SVG URL |
+|---------|---------------------|---------|
 | Compute Engine | `gcp:compute-engine` | `https://api.iconify.design/gcp/compute-engine.svg` |
 | Cloud Functions | `gcp:cloud-functions` | `https://api.iconify.design/gcp/cloud-functions.svg` |
 | Cloud Run | `gcp:cloud-run` | `https://api.iconify.design/gcp/cloud-run.svg` |
@@ -157,30 +159,30 @@ https://api.iconify.design/{prefix}/{icon-name}.svg
 | Cloud Logging | `gcp:cloud-logging` | `https://api.iconify.design/gcp/cloud-logging.svg` |
 | Cloud Monitoring | `gcp:cloud-monitoring` | `https://api.iconify.design/gcp/cloud-monitoring.svg` |
 | IAM | `gcp:identity-and-access-management` | `https://api.iconify.design/gcp/identity-and-access-management.svg` |
-
-**`logos:` / `devicon:` 通用云图标**：
-
-| 服务 | icon-pack 引用 | SVG URL | 宽高比 |
-|------|---------------|---------|--------|
-| Google Cloud (通用) | `logos:google-cloud` | `https://api.iconify.design/logos/google-cloud.svg` | 1:1 |
+ 
+**`logos:` / `devicon:` generic cloud icons**:
+ 
+| Service | icon-pack reference | SVG URL | Aspect ratio |
+|---------|---------------------|---------|--------------|
+| Google Cloud (generic) | `logos:google-cloud` | `https://api.iconify.design/logos/google-cloud.svg` | 1:1 |
 | Cloud Functions | `logos:google-cloud-functions` | `https://api.iconify.design/logos/google-cloud-functions.svg` | 1:1 |
 | Cloud Run | `logos:google-cloud-run` | `https://api.iconify.design/logos/google-cloud-run.svg` | 1:1 |
 | Google Cloud (devicon) | `devicon:googlecloud` | `https://api.iconify.design/devicon/googlecloud.svg` | 1:1 |
-
+ 
 ### 1.3 Azure
-
-| 服务 | icon-pack 引用 | SVG URL | 宽高比 |
-|------|---------------|---------|--------|
-| Azure (通用) | `logos:microsoft-azure` | `https://api.iconify.design/logos/microsoft-azure.svg` | 1:1 |
+ 
+| Service | icon-pack reference | SVG URL | Aspect ratio |
+|---------|---------------------|---------|--------------|
+| Azure (generic) | `logos:microsoft-azure` | `https://api.iconify.design/logos/microsoft-azure.svg` | 1:1 |
 | Azure (devicon) | `devicon:azure` | `https://api.iconify.design/devicon/azure.svg` | 1:1 |
 | Azure DevOps | `devicon:azuredevops` | `https://api.iconify.design/devicon/azuredevops.svg` | 1:1 |
 | Azure Data Factory | `devicon:azuredatafactory` | `https://api.iconify.design/devicon/azuredatafactory.svg` | 1:1 |
 | Azure SQL Database | `devicon:azuresqldatabase` | `https://api.iconify.design/devicon/azuresqldatabase.svg` | 1:1 |
-
-### 1.4 其他云平台
-
-| 平台 | icon-pack 引用 | SVG URL |
-|------|---------------|---------|
+ 
+### 1.4 Other cloud platforms
+ 
+| Platform | icon-pack reference | SVG URL |
+|----------|---------------------|---------|
 | Cloudflare | `logos:cloudflare-icon` | `https://api.iconify.design/logos/cloudflare-icon.svg` |
 | Vercel | `logos:vercel-icon` | `https://api.iconify.design/logos/vercel-icon.svg` |
 | Netlify | `logos:netlify-icon` | `https://api.iconify.design/logos/netlify-icon.svg` |
@@ -191,18 +193,18 @@ https://api.iconify.design/{prefix}/{icon-name}.svg
 | Railway | `devicon:railway` | `https://api.iconify.design/devicon/railway.svg` |
 | Fly.io | `logos:fly-icon` | `https://api.iconify.design/logos/fly-icon.svg` |
 | PlanetScale | `logos:planetscale` | `https://api.iconify.design/logos/planetscale.svg` |
-| IPFS | `logos:ipfs` | `https://api.iconify.design/logos/ipfs.svg` ⚠ |
-
-> ⚠️ `logos:ipfs` 宽高比 ~3:1（严重横向扁平），严禁同时设 `w` 和 `h`。
-
+| IPFS | `logos:ipfs` | `https://api.iconify.design/logos/ipfs.svg` (non-square) |
+ 
+> **Note**: `logos:ipfs` has an aspect ratio of ~3:1 (severely horizontal); never set both `w` and `h` simultaneously.
+ 
 ---
-
-## 2. 编程语言 (Programming Languages)
-
-使用 **devicon**（首选，命名最简洁）或 **skill-icons**（有 light/dark 变体）。
-
-| 语言 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+## 2. Programming Languages
+ 
+Use **devicon** (preferred, cleanest naming) or **skill-icons** (has light/dark variants).
+ 
+| Language | devicon (preferred) | skill-icons | logos |
+|----------|---------------------|-------------|-------|
 | Python | `devicon:python` | `skill-icons:python-light` / `python-dark` | `logos:python` |
 | JavaScript | `devicon:javascript` | `skill-icons:javascript` | `logos:javascript` |
 | TypeScript | `devicon:typescript` | `skill-icons:typescript` | `logos:typescript` |
@@ -236,20 +238,20 @@ https://api.iconify.design/{prefix}/{icon-name}.svg
 | GraphQL | — | `skill-icons:graphql-light` / `graphql-dark` | `logos:graphql` |
 | Bash | `devicon:bash` | `skill-icons:bash-light` / `bash-dark` | — |
 | PowerShell | — | — | `logos:powershell` |
-
-**SVG URL 示例**（devicon）：
+ 
+**SVG URL examples** (devicon):
 ```
 https://api.iconify.design/devicon/python.svg
 https://api.iconify.design/devicon/go.svg
 https://api.iconify.design/devicon/rust.svg
 ```
-
+ 
 ---
-
-## 3. 运行时与后端框架 (Runtimes & Backend Frameworks)
-
-| 技术 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+## 3. Runtimes & Backend Frameworks
+ 
+| Technology | devicon (preferred) | skill-icons | logos |
+|------------|---------------------|-------------|-------|
 | Node.js | `devicon:nodejs` | `skill-icons:nodejs-light` / `nodejs-dark` | `logos:nodejs` |
 | Deno | — | `skill-icons:deno-light` / `deno-dark` | `logos:deno` |
 | Bun | `devicon:bun` | `skill-icons:bun-light` / `bun-dark` | `logos:bun` |
@@ -270,24 +272,23 @@ https://api.iconify.design/devicon/rust.svg
 | TypeORM | `devicon:typeorm` | — | `logos:typeorm` |
 | Sequelize | `devicon:sequelize` | `skill-icons:sequelize-light` / `sequelize-dark` | `logos:sequelize` |
 | Mongoose | `devicon:mongoose` | — | — |
-
+ 
 ---
-
-## 4. 数据库与存储 (Databases & Storage)
-
-| 数据库 | devicon (首选) | skill-icons | logos |
-|--------|---------------|-------------|-------|
+ 
+## 4. Databases & Storage
+ 
+| Database | devicon (preferred) | skill-icons | logos |
+|----------|---------------------|-------------|-------|
 | PostgreSQL | `devicon:postgresql` | `skill-icons:postgresql-light` / `postgresql-dark` | `logos:postgresql` |
 | MySQL | `devicon:mysql` | `skill-icons:mysql-light` / `mysql-dark` | `logos:mysql-icon` |
 | MongoDB | `devicon:mongodb` | `skill-icons:mongodb` | `logos:mongodb-icon` |
-| Redis | `devicon:redis` | `skill-icons:redis-light` / `redis-dark` | `logos:redis` ⚠ |
+| Redis | `devicon:redis` | `skill-icons:redis-light` / `redis-dark` | `logos:redis` (non-square) |
 | SQLite | `devicon:sqlite` | `skill-icons:sqlite` | `logos:sqlite` |
 | MariaDB | `devicon:mariadb` | — | `logos:mariadb-icon` |
 | Cassandra | `devicon:cassandra` | `skill-icons:cassandra-light` / `cassandra-dark` | `logos:cassandra` |
 | Neo4j | `devicon:neo4j` | — | `logos:neo4j` |
 | Elasticsearch | `devicon:elasticsearch` | `skill-icons:elasticsearch-light` / `elasticsearch-dark` | `logos:elasticsearch` |
 | InfluxDB | `devicon:influxdb` | — | `logos:influxdb-icon` |
-| ClickHouse | `devicon:clickhouse` | — | — |
 | ClickHouse | `devicon:clickhouse` | — | — |
 | DuckDB | `devicon:duckdb` | — | — |
 | Snowflake | — | — | `logos:snowflake-icon` |
@@ -299,17 +300,17 @@ https://api.iconify.design/devicon/rust.svg
 | CouchDB | `devicon:couchdb` | — | — |
 | FoundationDB | `devicon:foundationdb` | — | — |
 | Ceph | `devicon:ceph` | — | — |
-
-> ⚠ `logos:redis` 宽高比 ~3.2:1，在 `@{ img: }` 中严禁同时设 `w` 和 `h`。替代方案：用 `logos:heroku-redis`（更方）或 `devicon:redis`（1:1）。
-
+ 
+> **Note**: `logos:redis` has an aspect ratio of ~3.2:1; never set both `w` and `h` in `@{ img: }`. Alternatives: `logos:heroku-redis` (more square) or `devicon:redis` (1:1).
+ 
 ---
-
-## 5. DevOps 与 CI/CD
-
-### 5.1 CI/CD 平台
-
-| 工具 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+## 5. DevOps & CI/CD
+ 
+### 5.1 CI/CD platforms
+ 
+| Tool | devicon (preferred) | skill-icons | logos |
+|------|---------------------|-------------|-------|
 | GitHub Actions | `devicon:githubactions` | `skill-icons:githubactions-light` / `githubactions-dark` | `logos:github-actions` |
 | GitLab CI | `devicon:gitlab` | `skill-icons:gitlab-light` / `gitlab-dark` | `logos:gitlab-icon` |
 | Jenkins | `devicon:jenkins` | `skill-icons:jenkins-light` / `jenkins-dark` | `logos:jenkins` |
@@ -322,11 +323,11 @@ https://api.iconify.design/devicon/rust.svg
 | TeamCity | `devicon:teamcity` | — | `logos:teamcity` |
 | Codecov | — | — | `logos:codecov` |
 | Coveralls | — | — | `logos:coveralls` |
-
-### 5.2 基础设施即代码 (IaC)
-
-| 工具 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+### 5.2 Infrastructure as Code (IaC)
+ 
+| Tool | devicon (preferred) | skill-icons | logos |
+|------|---------------------|-------------|-------|
 | Terraform | `devicon:terraform` | `skill-icons:terraform-light` / `terraform-dark` | `logos:terraform-icon` |
 | Ansible | `devicon:ansible` | `skill-icons:ansible` | `logos:ansible` |
 | Pulumi | `devicon:pulumi` | — | `logos:pulumi` |
@@ -336,11 +337,11 @@ https://api.iconify.design/devicon/rust.svg
 | Packer | `devicon:packer` | — | `logos:packer` |
 | OpenTofu | — | — | `logos:opentofu` |
 | Crossplane | — | — | `logos:crossplane` |
-
-### 5.3 容器与编排
-
-| 工具 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+### 5.3 Containers & orchestration
+ 
+| Tool | devicon (preferred) | skill-icons | logos |
+|------|---------------------|-------------|-------|
 | Docker | `devicon:docker` | `skill-icons:docker` | `logos:docker-icon` |
 | Kubernetes | `devicon:kubernetes` | `skill-icons:kubernetes` | `logos:kubernetes` |
 | Helm | `devicon:helm` | — | `logos:helm` |
@@ -354,14 +355,13 @@ https://api.iconify.design/devicon/rust.svg
 | Linkerd | `devicon:linkerd` | — | `logos:linkerd` |
 | Traefik | `devicon:traefikproxy` | — | — |
 | Consul | `devicon:consul` | — | `logos:consul` |
-| Vagrant | `devicon:vagrant` | — | `logos:vagrant-icon` |
-
+ 
 ---
-
-## 6. 可观测性 (Observability)
-
-| 工具 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+## 6. Observability
+ 
+| Tool | devicon (preferred) | skill-icons | logos |
+|------|---------------------|-------------|-------|
 | Grafana | `devicon:grafana` | `skill-icons:grafana-light` / `grafana-dark` | `logos:grafana` |
 | Prometheus | `devicon:prometheus` | `skill-icons:prometheus` | `logos:prometheus` |
 | Datadog | `devicon:datadog` | — | `logos:datadog-icon` |
@@ -378,13 +378,13 @@ https://api.iconify.design/devicon/rust.svg
 | Mimir | — | — | `logos:mimir-icon` |
 | Tempo | — | — | `logos:tempo` |
 | SigNoz | — | — | `logos:signoz` |
-
+ 
 ---
-
-## 7. 消息队列与流处理 (Messaging & Streaming)
-
-| 服务 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+## 7. Messaging & Streaming
+ 
+| Service | devicon (preferred) | skill-icons | logos |
+|---------|---------------------|-------------|-------|
 | Apache Kafka | `devicon:apachekafka` | `skill-icons:kafka` | `logos:kafka-icon` |
 | RabbitMQ | `devicon:rabbitmq` | `skill-icons:rabbitmq-light` / `rabbitmq-dark` | `logos:rabbitmq-icon` |
 | Apache Pulsar | `devicon:pulsar` | — | — |
@@ -393,443 +393,15 @@ https://api.iconify.design/devicon/rust.svg
 | Apache Flink | — | — | `logos:apache-flink-icon` |
 | Apache Spark | `devicon:apachespark` | — | `logos:apache-spark` |
 | Apache Storm | — | — | `logos:apache-storm` |
-
+ 
 ---
-
+ 
 ## 8. AI / ML / LLM
-
-| 技术 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
+ 
+| Technology | devicon (preferred) | skill-icons | logos |
+|------------|---------------------|-------------|-------|
 | OpenAI | — | — | `logos:openai-icon` |
 | Anthropic | — | — | `logos:anthropic-icon` |
 | TensorFlow | `devicon:tensorflow` | `skill-icons:tensorflow-light` / `tensorflow-dark` | `logos:tensorflow` |
 | PyTorch | `devicon:pytorch` | `skill-icons:pytorch-light` / `pytorch-dark` | `logos:pytorch-icon` |
-| Keras | `devicon:keras` | — | — |
-| Hugging Face | `devicon:huggingface` | — | — |
-| Jupyter | `devicon:jupyter` | — | `logos:jupyter` |
-| LangChain | — | — | `logos:langchain` |
-| LlamaIndex | — | — | `logos:llamaindex` |
-| Chroma | — | — | `logos:chroma` |
-| Pinecone | — | — | `logos:pinecone-icon` |
-| Qdrant | — | — | `logos:qdrant-icon` |
-| Weaviate | — | — | `logos:weaviate` |
-| Milvus | — | — | `logos:milvus` |
-| Ollama | `devicon:ollama` | — | — |
-| Mistral AI | — | — | `logos:mistral-ai-icon` |
-| Midjourney | — | — | `logos:midjourney` |
-| Stable Diffusion | — | `skill-icons:stable-diffusion` | `logos:stable-diffusion` |
-| Gradio | — | — | `logos:gradio-icon` |
-| Streamlit | `devicon:streamlit` | — | `logos:streamlit` |
-| MLflow | — | — | `logos:mlflow` |
-| NumPy | `devicon:numpy` | — | `logos:numpy` |
-| Pandas | `devicon:pandas` | — | `logos:pandas-icon` |
-| NVIDIA | — | — | `logos:nvidia` |
-| CUDA | `devicon:cuda` | — | — |
-
----
-
-## 9. 前端框架与工具 (Frontend)
-
-### 9.1 框架与元框架
-
-| 框架 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
-| React | `devicon:react` | `skill-icons:react-light` / `react-dark` | `logos:react` |
-| Next.js | `devicon:nextjs` | `skill-icons:nextjs-light` / `nextjs-dark` | `logos:nextjs-icon` |
-| Vue.js | `devicon:vuejs` | `skill-icons:vuejs-light` / `vuejs-dark` | `logos:vue` |
-| Nuxt.js | `devicon:nuxtjs` | `skill-icons:nuxtjs-light` / `nuxtjs-dark` | — |
-| Angular | `devicon:angular` | `skill-icons:angular-light` / `angular-dark` | `logos:angular-icon` |
-| Svelte | `devicon:svelte` | `skill-icons:svelte` | `logos:svelte-icon` |
-| SvelteKit | — | — | `logos:svelte-kit` |
-| SolidJS | `devicon:solidjs` | `skill-icons:solidjs-light` / `solidjs-dark` | `logos:solidjs-icon` |
-| Astro | `devicon:astro` | `skill-icons:astro` | `logos:astro-icon` |
-| Qwik | `devicon:qwik` | — | `logos:qwik-icon` |
-| Remix | `devicon:remix` | `skill-icons:remix-light` / `remix-dark` | `logos:remix-icon` |
-| Gatsby | `devicon:gatsby` | `skill-icons:gatsby` | `logos:gatsby` |
-| Ember | `devicon:ember` | `skill-icons:ember` | `logos:ember` |
-| jQuery | `devicon:jquery` | `skill-icons:jquery` | `logos:jquery` |
-| Backbone.js | `devicon:backbonejs` | — | `logos:backbone-icon` |
-| React Native | `devicon:reactnative` | — | — |
-| Flutter | `devicon:flutter` | `skill-icons:flutter-light` / `flutter-dark` | `logos:flutter` |
-| Electron | `devicon:electron` | — | `logos:electron` |
-
-### 9.2 CSS / UI 框架
-
-| 框架 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
-| Tailwind CSS | `devicon:tailwindcss` | `skill-icons:tailwindcss-light` / `tailwindcss-dark` | `logos:tailwindcss-icon` |
-| Bootstrap | `devicon:bootstrap` | `skill-icons:bootstrap` | `logos:bootstrap` |
-| Material UI | — | `skill-icons:materialui-light` / `materialui-dark` | `logos:material-ui` |
-| Chakra UI | `devicon:chakraui` | — | — |
-| Ant Design | `devicon:antdesign` | — | `logos:ant-design` |
-| shadcn/ui | — | — | `logos:shadcnui` |
-| Radix UI | — | — | `logos:radix-ui` |
-| Vuetify | `devicon:vuetify` | `skill-icons:vuetify-light` / `vuetify-dark` | `logos:vuetifyjs` |
-| UnoCSS | — | — | `logos:unocss` |
-
-### 9.3 构建与测试工具
-
-| 工具 | devicon (首选) | skill-icons | logos |
-|------|---------------|-------------|-------|
-| Vite | `devicon:vite` | `skill-icons:vite-light` / `vite-dark` | `logos:vite` |
-| webpack | `devicon:webpack` | `skill-icons:webpack-light` / `webpack-dark` | `logos:webpack` |
-| Rollup | `devicon:rollup` | — | `logos:rollupjs` |
-| esbuild | — | — | `logos:esbuild` |
-| Turbopack | — | — | `logos:turbopack-icon` |
-| Babel | `devicon:babel` | — | `logos:babel` |
-| SWC | `devicon:swc` | — | — |
-| Vitest | `devicon:vitest` | `skill-icons:vitest-light` / `vitest-dark` | `logos:vitest` |
-| Jest | — | `skill-icons:jest` | `logos:jest` |
-| Playwright | `devicon:playwright` | — | `logos:playwright` |
-| Cypress | `devicon:cypressio` | `skill-icons:cypress-light` / `cypress-dark` | `logos:cypress-icon` |
-| Testing Library | — | — | `logos:testing-library` |
-| Storybook | `devicon:storybook` | — | `logos:storybook-icon` |
-
----
-
-## 10. 工具与平台 (Tools & Platforms)
-
-### 10.1 版本控制与协作
-
-| 工具 | devicon | skill-icons | logos | codicon |
-|------|---------|-------------|-------|---------|
-| GitHub | `devicon:github` | `skill-icons:github-light` / `github-dark` | `logos:github-icon` | `codicon:github` |
-| GitLab | `devicon:gitlab` | `skill-icons:gitlab-light` / `gitlab-dark` | `logos:gitlab-icon` | — |
-| Bitbucket | `devicon:bitbucket` | `skill-icons:bitbucket-light` / `bitbucket-dark` | `logos:bitbucket` | — |
-| Git (通用) | `devicon:git` | `skill-icons:git` | `logos:git-icon` | `codicon:git-branch` |
-| GitHub Copilot | `devicon:githubcopilot` | — | `logos:github-copilot` | — |
-| Gitea | `devicon:gitea` | — | — | — |
-
-### 10.2 协作与项目管理
-
-| 工具 | devicon | logos |
-|------|---------|-------|
-| Figma | `devicon:figma` | `logos:figma` |
-| Notion | `devicon:notion` | `logos:notion-icon` |
-| Slack | `devicon:slack` | `logos:slack-icon` |
-| Jira | `devicon:jira` | `logos:jira` |
-| Linear | — | `logos:linear-icon` |
-| Confluence | `devicon:confluence` | `logos:confluence` |
-| Trello | `devicon:trello` | `logos:trello` |
-| Asana | — | `logos:asana-icon` |
-| Discord | — | `logos:discord-icon` |
-| Teams | — | `logos:microsoft-teams` |
-
-### 10.3 API 与网络
-
-| 工具 | devicon | skill-icons | logos |
-|------|---------|-------------|-------|
-| Postman | `devicon:postman` | `skill-icons:postman` | `logos:postman-icon` |
-| Insomnia | `devicon:insomnia` | — | `logos:insomnia` |
-| Swagger | `devicon:swagger` | — | `logos:swagger` |
-| Nginx | `devicon:nginx` | `skill-icons:nginx` | `logos:nginx` ⚠️ |
-| Apache | `devicon:apache` | — | `logos:apache` |
-| Caddy | — | — | `logos:caddy` |
-| HAProxy | `devicon:haproxy` | — | — |
-| Cloudflare | `devicon:cloudflare` | `skill-icons:cloudflare-light` / `cloudflare-dark` | `logos:cloudflare-icon` |
-
-> ⚠️ `logos:nginx` 宽高比 ~3.5:1（严重横向扁平），严禁同时设 `w` 和 `h`。推荐替代：`devicon:nginx`（1:1）。
-
-### 10.4 安全与身份认证
-
-| 工具 | devicon | logos |
-|------|---------|-------|
-| Okta | `devicon:okta` | `logos:okta-icon` |
-| Auth0 | — | `logos:auth0-icon` |
-| SuperTokens | — | `logos:supertokens-icon` |
-| Clerk | — | `logos:clerk` |
-| Vault | `devicon:vault` | `logos:vault` |
-| Snyk | — | `logos:snyk` |
-| SonarQube | `devicon:sonarqube` | `logos:sonarqube` |
-
-### 10.5 数据工程
-
-| 工具 | devicon | logos |
-|------|---------|-------|
-| Apache Airflow | `devicon:apacheairflow` | `logos:airflow-icon` |
-| dbt | `devicon:dbt` | `logos:dbt-icon` |
-| Apache Hadoop | `devicon:hadoop` | — |
-| Apache Hive | — | `logos:hive` |
-| Presto | `devicon:presto` | `logos:presto` |
-| Trino | — | `logos:trino` |
-| Apache NiFi | `devicon:nifi` | — |
-| Databricks | `devicon:databricks` | — |
-| Fivetran | — | `logos:fivetran` |
-| Airbyte | — | `logos:airbyte` |
-
----
-
-## 11. 开发概念 (codicon — IDE/Git/概念图标)
-
-codicon 是 VS Code 使用的图标集，600+ 图标。适用于表示 **Git 操作、开发概念、IDE 功能**等抽象操作。
-
-### 11.1 Git 操作
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| Git Branch | `codicon:git-branch` | `https://api.iconify.design/codicon/git-branch.svg` |
-| Git Commit | `codicon:git-commit` | `https://api.iconify.design/codicon/git-commit.svg` |
-| Git Merge | `codicon:git-merge` | `https://api.iconify.design/codicon/git-merge.svg` |
-| Pull Request | `codicon:git-pull-request` | `https://api.iconify.design/codicon/git-pull-request.svg` |
-| PR Draft | `codicon:git-pull-request-draft` | `https://api.iconify.design/codicon/git-pull-request-draft.svg` |
-| PR Closed | `codicon:git-pull-request-closed` | `https://api.iconify.design/codicon/git-pull-request-closed.svg` |
-| PR Create | `codicon:git-pull-request-create` | `https://api.iconify.design/codicon/git-pull-request-create.svg` |
-| Git Fetch | `codicon:git-fetch` | `https://api.iconify.design/codicon/git-fetch.svg` |
-| Git Stash | `codicon:git-stash` | `https://api.iconify.design/codicon/git-stash.svg` |
-| Git Compare | `codicon:git-compare` | `https://api.iconify.design/codicon/git-compare.svg` |
-| Repo | `codicon:repo` | `https://api.iconify.design/codicon/repo.svg` |
-| Repo Clone | `codicon:repo-clone` | `https://api.iconify.design/codicon/repo-clone.svg` |
-| Repo Push | `codicon:repo-push` | `https://api.iconify.design/codicon/repo-push.svg` |
-| Repo Pull | `codicon:repo-pull` | `https://api.iconify.design/codicon/repo-pull.svg` |
-| Repo Forked | `codicon:repo-forked` | `https://api.iconify.design/codicon/repo-forked.svg` |
-
-### 11.2 Terminal / Shell
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| Terminal | `codicon:terminal` | `https://api.iconify.design/codicon/terminal.svg` |
-| Terminal Bash | `codicon:terminal-bash` | `https://api.iconify.design/codicon/terminal-bash.svg` |
-| Terminal Linux | `codicon:terminal-linux` | `https://api.iconify.design/codicon/terminal-linux.svg` |
-| Terminal PowerShell | `codicon:terminal-powershell` | `https://api.iconify.design/codicon/terminal-powershell.svg` |
-
-### 11.3 Debug
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| Debug | `codicon:debug` | `https://api.iconify.design/codicon/debug.svg` |
-| Debug Start | `codicon:debug-start` | `https://api.iconify.design/codicon/debug-start.svg` |
-| Debug Stop | `codicon:debug-stop` | `https://api.iconify.design/codicon/debug-stop.svg` |
-| Debug Pause | `codicon:debug-pause` | `https://api.iconify.design/codicon/debug-pause.svg` |
-| Debug Continue | `codicon:debug-continue` | `https://api.iconify.design/codicon/debug-continue.svg` |
-| Debug Step Over | `codicon:debug-step-over` | `https://api.iconify.design/codicon/debug-step-over.svg` |
-| Debug Step Into | `codicon:debug-step-into` | `https://api.iconify.design/codicon/debug-step-into.svg` |
-| Debug Console | `codicon:debug-console` | `https://api.iconify.design/codicon/debug-console.svg` |
-| Breakpoint | `codicon:debug-breakpoint` | `https://api.iconify.design/codicon/debug-breakpoint.svg` |
-| Breakpoint Conditional | `codicon:debug-breakpoint-conditional` | `https://api.iconify.design/codicon/debug-breakpoint-conditional.svg` |
-
-### 11.4 文件与编辑器操作
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| File | `codicon:file` | `https://api.iconify.design/codicon/file.svg` |
-| File Code | `codicon:file-code` | `https://api.iconify.design/codicon/file-code.svg` |
-| File Text | `codicon:file-text` | `https://api.iconify.design/codicon/file-text.svg` |
-| File Binary | `codicon:file-binary` | `https://api.iconify.design/codicon/file-binary.svg` |
-| Folder | `codicon:folder` | `https://api.iconify.design/codicon/folder.svg` |
-| Folder Opened | `codicon:folder-opened` | `https://api.iconify.design/codicon/folder-opened.svg` |
-| New File | `codicon:new-file` | `https://api.iconify.design/codicon/new-file.svg` |
-| New Folder | `codicon:new-folder` | `https://api.iconify.design/codicon/new-folder.svg` |
-| Go to File | `codicon:go-to-file` | `https://api.iconify.design/codicon/go-to-file.svg` |
-| Search | `codicon:search` | `https://api.iconify.design/codicon/search.svg` |
-| Settings | `codicon:settings` | `https://api.iconify.design/codicon/settings.svg` |
-| Settings Gear | `codicon:settings-gear` | `https://api.iconify.design/codicon/settings-gear.svg` |
-
-### 11.5 代码符号
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| Symbol Class | `codicon:symbol-class` | `https://api.iconify.design/codicon/symbol-class.svg` |
-| Symbol Method | `codicon:symbol-method` | `https://api.iconify.design/codicon/symbol-method.svg` |
-| Symbol Interface | `codicon:symbol-interface` | `https://api.iconify.design/codicon/symbol-interface.svg` |
-| Symbol Variable | `codicon:symbol-variable` | `https://api.iconify.design/codicon/symbol-variable.svg` |
-| Symbol Constant | `codicon:symbol-constant` | `https://api.iconify.design/codicon/symbol-constant.svg` |
-| Symbol Property | `codicon:symbol-property` | `https://api.iconify.design/codicon/symbol-property.svg` |
-| Symbol Field | `codicon:symbol-field` | `https://api.iconify.design/codicon/symbol-field.svg` |
-| Symbol Enum | `codicon:symbol-enum` | `https://api.iconify.design/codicon/symbol-enum.svg` |
-| Symbol String | `codicon:symbol-string` | `https://api.iconify.design/codicon/symbol-string.svg` |
-| Symbol Numeric | `codicon:symbol-numeric` | `https://api.iconify.design/codicon/symbol-numeric.svg` |
-| Symbol Boolean | `codicon:symbol-boolean` | `https://api.iconify.design/codicon/symbol-boolean.svg` |
-| Symbol Array | `codicon:symbol-array` | `https://api.iconify.design/codicon/symbol-array.svg` |
-| Symbol Keyword | `codicon:symbol-keyword` | `https://api.iconify.design/codicon/symbol-keyword.svg` |
-| Symbol Snippet | `codicon:symbol-snippet` | `https://api.iconify.design/codicon/symbol-snippet.svg` |
-| Symbol Namespace | `codicon:symbol-namespace` | `https://api.iconify.design/codicon/symbol-namespace.svg` |
-| Symbol Structure | `codicon:symbol-structure` | `https://api.iconify.design/codicon/symbol-structure.svg` |
-
-### 11.6 通用 UI 概念
-
-| 概念 | codicon 引用 | SVG URL |
-|------|------------|---------|
-| Check | `codicon:check` | `https://api.iconify.design/codicon/check.svg` |
-| Close/Error | `codicon:error` | `https://api.iconify.design/codicon/error.svg` |
-| Warning | `codicon:warning` | `https://api.iconify.design/codicon/warning.svg` |
-| Info | `codicon:info` | `https://api.iconify.design/codicon/info.svg` |
-| Add | `codicon:add` | `https://api.iconify.design/codicon/add.svg` |
-| Delete/Trash | `codicon:trash` | `https://api.iconify.design/codicon/trash.svg` |
-| Edit | `codicon:edit` | `https://api.iconify.design/codicon/edit.svg` |
-| Refresh | `codicon:refresh` | `https://api.iconify.design/codicon/refresh.svg` |
-| Lock | `codicon:lock` | `https://api.iconify.design/codicon/lock.svg` |
-| Unlock | `codicon:unlock` | `https://api.iconify.design/codicon/unlock.svg` |
-| Link | `codicon:link` | `https://api.iconify.design/codicon/link.svg` |
-| External Link | `codicon:link-external` | `https://api.iconify.design/codicon/link-external.svg` |
-| Globe | `codicon:globe` | `https://api.iconify.design/codicon/globe.svg` |
-| Cloud | `codicon:cloud` | `https://api.iconify.design/codicon/cloud.svg` |
-| Server | `codicon:server` | `https://api.iconify.design/codicon/server.svg` |
-| Database | `codicon:database` | `https://api.iconify.design/codicon/database.svg` |
-| Package | `codicon:package` | `https://api.iconify.design/codicon/package.svg` |
-| Rocket/Deploy | `codicon:rocket` | `https://api.iconify.design/codicon/rocket.svg` |
-| Bell/Notification | `codicon:bell` | `https://api.iconify.design/codicon/bell.svg` |
-| Person | `codicon:person` | `https://api.iconify.design/codicon/person.svg` |
-| Home | `codicon:home` | `https://api.iconify.design/codicon/home.svg` |
-| Calendar | `codicon:calendar` | `https://api.iconify.design/codicon/calendar.svg` |
-| Star | `codicon:star-full` | `https://api.iconify.design/codicon/star-full.svg` |
-| Bookmark | `codicon:bookmark` | `https://api.iconify.design/codicon/bookmark.svg` |
-| Tag | `codicon:tag` | `https://api.iconify.design/codicon/tag.svg` |
-| Play | `codicon:play` | `https://api.iconify.design/codicon/play.svg` |
-| Stop | `codicon:stop-circle` | `https://api.iconify.design/codicon/stop-circle.svg` |
-| Shield | `codicon:shield` | `https://api.iconify.design/codicon/shield.svg` |
-| Key | `codicon:key` | `https://api.iconify.design/codicon/key.svg` |
-| Plug | `codicon:plug` | `https://api.iconify.design/codicon/plug.svg` |
-| Lightbulb | `codicon:lightbulb` | `https://api.iconify.design/codicon/lightbulb.svg` |
-| Heart | `codicon:heart` | `https://api.iconify.design/codicon/heart.svg` |
-| Heart Filled | `codicon:heart-filled` | `https://api.iconify.design/codicon/heart-filled.svg` |
-| Split Vertical | `codicon:split-vertical` | `https://api.iconify.design/codicon/split-vertical.svg` |
-| Split Horizontal | `codicon:split-horizontal` | `https://api.iconify.design/codicon/split-horizontal.svg` |
-| Browser | `codicon:browser` | `https://api.iconify.design/codicon/browser.svg` |
-| Device Mobile | `codicon:device-mobile` | `https://api.iconify.design/codicon/device-mobile.svg` |
-
----
-
-## 12. 文件类型图标 (vscode-icons)
-
-VS Code 风格文件类型图标，共 1,513 个，命名规范统一为 `file-type-{name}`。适合需要文件类型语义的技术绘图（代码文件、配置文件、技术栈标识）。
-
-### 12.1 编程语言
-
-| 语言 | icon-pack 引用 | SVG URL |
-|------|---------------|---------|
-| Python | `vscode-icons:file-type-python` | `https://api.iconify.design/vscode-icons/file-type-python.svg` |
-| JavaScript | `vscode-icons:file-type-js` | `https://api.iconify.design/vscode-icons/file-type-js.svg` |
-| TypeScript | `vscode-icons:file-type-typescript` | `https://api.iconify.design/vscode-icons/file-type-typescript.svg` |
-| Java | `vscode-icons:file-type-java` | `https://api.iconify.design/vscode-icons/file-type-java.svg` |
-| Go | `vscode-icons:file-type-go` | `https://api.iconify.design/vscode-icons/file-type-go.svg` |
-| Rust | `vscode-icons:file-type-rust` | `https://api.iconify.design/vscode-icons/file-type-rust.svg` |
-| C | `vscode-icons:file-type-c` | `https://api.iconify.design/vscode-icons/file-type-c.svg` |
-| C++ | `vscode-icons:file-type-cpp` | `https://api.iconify.design/vscode-icons/file-type-cpp.svg` |
-| C# | `vscode-icons:file-type-csharp` | `https://api.iconify.design/vscode-icons/file-type-csharp.svg` |
-| PHP | `vscode-icons:file-type-php` | `https://api.iconify.design/vscode-icons/file-type-php.svg` |
-| Ruby | `vscode-icons:file-type-ruby` | `https://api.iconify.design/vscode-icons/file-type-ruby.svg` |
-| Swift | `vscode-icons:file-type-swift` | `https://api.iconify.design/vscode-icons/file-type-swift.svg` |
-| Kotlin | `vscode-icons:file-type-kotlin` | `https://api.iconify.design/vscode-icons/file-type-kotlin.svg` |
-| Scala | `vscode-icons:file-type-scala` | `https://api.iconify.design/vscode-icons/file-type-scala.svg` |
-
-### 12.2 前端框架与工具
-
-| 框架/工具 | icon-pack 引用 | SVG URL |
-|----------|---------------|---------|
-| React | `vscode-icons:file-type-reactjs` | `https://api.iconify.design/vscode-icons/file-type-reactjs.svg` |
-| Vue | `vscode-icons:file-type-vue` | `https://api.iconify.design/vscode-icons/file-type-vue.svg` |
-| Angular | `vscode-icons:file-type-angular` | `https://api.iconify.design/vscode-icons/file-type-angular.svg` |
-| Svelte | `vscode-icons:file-type-svelte` | `https://api.iconify.design/vscode-icons/file-type-svelte.svg` |
-| Node.js | `vscode-icons:file-type-node` | `https://api.iconify.design/vscode-icons/file-type-node.svg` |
-| NPM | `vscode-icons:file-type-npm` | `https://api.iconify.design/vscode-icons/file-type-npm.svg` |
-| Webpack | `vscode-icons:file-type-webpack` | `https://api.iconify.design/vscode-icons/file-type-webpack.svg` |
-| Vite | `vscode-icons:file-type-vite` | `https://api.iconify.design/vscode-icons/file-type-vite.svg` |
-
-### 12.3 配置与标记文件
-
-| 类型 | icon-pack 引用 | SVG URL |
-|------|---------------|---------|
-| HTML | `vscode-icons:file-type-html` | `https://api.iconify.design/vscode-icons/file-type-html.svg` |
-| CSS | `vscode-icons:file-type-css` | `https://api.iconify.design/vscode-icons/file-type-css.svg` |
-| SCSS | `vscode-icons:file-type-scss` | `https://api.iconify.design/vscode-icons/file-type-scss.svg` |
-| JSON | `vscode-icons:file-type-json` | `https://api.iconify.design/vscode-icons/file-type-json.svg` |
-| YAML | `vscode-icons:file-type-yaml` | `https://api.iconify.design/vscode-icons/file-type-yaml.svg` |
-| XML | `vscode-icons:file-type-xml` | `https://api.iconify.design/vscode-icons/file-type-xml.svg` |
-| Markdown | `vscode-icons:file-type-markdown` | `https://api.iconify.design/vscode-icons/file-type-markdown.svg` |
-| SQL | `vscode-icons:file-type-sql` | `https://api.iconify.design/vscode-icons/file-type-sql.svg` |
-| Shell | `vscode-icons:file-type-shell` | `https://api.iconify.design/vscode-icons/file-type-shell.svg` |
-
-### 12.4 DevOps 与基础设施
-
-| 工具 | icon-pack 引用 | SVG URL |
-|------|---------------|---------|
-| Docker | `vscode-icons:file-type-docker` | `https://api.iconify.design/vscode-icons/file-type-docker.svg` |
-| Git | `vscode-icons:file-type-git` | `https://api.iconify.design/vscode-icons/file-type-git.svg` |
-| Terraform | `vscode-icons:file-type-terraform` | `https://api.iconify.design/vscode-icons/file-type-terraform.svg` |
-| Nginx | `vscode-icons:file-type-nginx` | `https://api.iconify.design/vscode-icons/file-type-nginx.svg` |
-| MySQL | `vscode-icons:file-type-mysql` | `https://api.iconify.design/vscode-icons/file-type-mysql.svg` |
-| SQLite | `vscode-icons:file-type-sqlite` | `https://api.iconify.design/vscode-icons/file-type-sqlite.svg` |
-| MongoDB | `vscode-icons:file-type-mongo` | `https://api.iconify.design/vscode-icons/file-type-mongo.svg` |
-
-> **注意**：Kubernetes、Linux、Redis 仅有 `folder-type-*` 图标（如 `vscode-icons:folder-type-kubernetes`），无 `file-type-` 变体；这几项优先改用 `logos`/`devicon` 等价图标。
-
----
-
-## 图标包注册方法
-
-注册 6 个图标包后，本目录中所有图标均可用 icon-pack 语法（`@{ icon: }` / `(pack:icon)`）引用；未注册时改用远程 URL 兜底（见上方「图标使用语法」）。CDN 链接裸用，不带版本号。
-
-### CDN / mkdocs extra_javascript（推荐，无需打包器）
-
-```javascript
-(function () {
-  function registerIcons() {
-    if (typeof mermaid === 'undefined') { setTimeout(registerIcons, 100); return; }
-    var iconPacks = ['logos', 'skill-icons', 'devicon', 'codicon', 'gcp', 'vscode-icons'];
-    try {
-      mermaid.registerIconPacks(iconPacks.map(function (name) {
-        return { name: name, loader: function () {
-          return fetch('https://unpkg.com/@iconify-json/' + name + '/icons.json').then(function (res) { return res.json(); });
-        }};
-      }));
-    } catch (e) { console.warn('Icon pack registration failed:', e.message); }
-  }
-  registerIcons();
-})();
-```
-
-### 多 icon set 注册（自托管/Webpack/Vite）
-
-```javascript
-import mermaid from 'mermaid';
-
-mermaid.registerIconPacks([
-  { name: 'logos',        loader: () => fetch('https://unpkg.com/@iconify-json/logos/icons.json').then(res => res.json()) },
-  { name: 'skill-icons',  loader: () => fetch('https://unpkg.com/@iconify-json/skill-icons/icons.json').then(res => res.json()) },
-  { name: 'devicon',      loader: () => fetch('https://unpkg.com/@iconify-json/devicon/icons.json').then(res => res.json()) },
-  { name: 'codicon',      loader: () => fetch('https://unpkg.com/@iconify-json/codicon/icons.json').then(res => res.json()) },
-  { name: 'gcp',          loader: () => fetch('https://unpkg.com/@iconify-json/gcp/icons.json').then(res => res.json()) },
-  { name: 'vscode-icons', loader: () => fetch('https://unpkg.com/@iconify-json/vscode-icons/icons.json').then(res => res.json()) },
-]);
-
-mermaid.initialize({ startOnLoad: true });
-```
-
-### npm 安装
-
-```bash
-npm install @iconify-json/logos @iconify-json/skill-icons @iconify-json/devicon @iconify-json/codicon @iconify-json/gcp @iconify-json/vscode-icons
-```
-
-```javascript
-mermaid.registerIconPacks([
-  { name: 'logos',        loader: () => import('@iconify-json/logos').then(m => m.icons) },
-  { name: 'skill-icons',  loader: () => import('@iconify-json/skill-icons').then(m => m.icons) },
-  { name: 'devicon',      loader: () => import('@iconify-json/devicon').then(m => m.icons) },
-  { name: 'codicon',      loader: () => import('@iconify-json/codicon').then(m => m.icons) },
-  { name: 'gcp',          loader: () => import('@iconify-json/gcp').then(m => m.icons) },
-  { name: 'vscode-icons', loader: () => import('@iconify-json/vscode-icons').then(m => m.icons) },
-]);
-```
-
----
-
-## 🛠 Iconify API 搜索
-
-当需要查找不在本目录中的图标时：
-
-```
-GET https://api.iconify.design/search?query={关键词}&limit=20&prefixes=logos,devicon,gcp,vscode-icons,codicon,skill-icons
-```
-
-响应格式：`{"icons": ["logos:aws-ec2", "devicon:docker", ...], "total": 5, ...}`
-
-常用组合：
-- 云服务图标：`prefixes=logos`
-- Google Cloud 服务：`prefixes=gcp`
-- 编程语言/框架/工具：`prefixes=devicon,skill-icons`
-- 文件类型图标：`prefixes=vscode-icons`
-- 开发概念/IDE：`prefixes=codicon`
-- 全面搜索：`prefixes=logos,devicon,gcp,vscode-icons,codicon,skill-icons`
-
-> **重要提示**: 搜索结果返回的是 `pack:icon-name` 格式。已注册图标包时直接用该格式；未注册时 SVG URL 需转换为 `https://api.iconify.design/{pack}/{icon-name}.svg`。
+ 

@@ -28,7 +28,9 @@ This is an **AI Agent Skill** for creating Mermaid diagrams. It follows the [Age
 
 All diagram examples MUST use the Blueprint design system:
 - IBM Carbon v11 color tokens (defined in `examples/design-system.md`)
-- Semantic classDef names: `bpProcess`, `bpData`, `bpDecision`, `bpSuccess`, `bpError`, `bpExternal`, `bpUser`, `bpInfo`, `bpGroup`, `bpBoundary`
+- Semantic classDef names: `bpProcess`, `bpData`, `bpDecision`, `bpWarning`, `bpSuccess`, `bpError`, `bpExternal`, `bpUser`, `bpInfo`, `bpGroup`, `bpBoundary`
+- **classDef in code blocks must match canonical definitions exactly**: every `classDef` must include `color:#161616` (or `color:#525252` for `bpExternal`, `color:#393939` for `bpGroup`/`bpBoundary`). Do not omit the `color` attribute.
+- **`bpExternal` text color is `#525252`** (not `#697077`). This is a common mistake.
 - No ad-hoc colors — always reference the palette
 - No emoji in diagram text, labels, edges, titles, or subgraphs
 
@@ -73,9 +75,12 @@ When modifying examples, verify:
 1. **No emoji** — Strictly prohibited in all diagram content
 2. **Blueprint palette only** — Never introduce ad-hoc hex colors
 3. **Keep SKILL.md lean** — Push detailed reference material to `examples/`
-4. **No duplicate content** — Each piece of information lives in exactly one place
+4. **No duplicate content** — Each piece of information lives in exactly one place; `classDef` templates are canonical in `design-system.md`, not duplicated in other files
 5. **Progressive disclosure** — `examples/` files are loaded on demand, not pre-loaded
 6. **`linkStyle` is flowchart/graph ONLY** — Remove from all other diagram types
+7. **classDef `color` attribute is mandatory** — Every `classDef` declaration must include the correct `color` attribute matching `design-system.md`
+8. **`bpExternal` color is `#525252`** — Not `#697077`; this is a frequently-inherited mistake from older code blocks
+9. **No non-canonical classDef names** — Do not invent names like `bpStart`/`bpEnd`; use `bpProcess`/`bpSuccess` instead
 
 ---
 

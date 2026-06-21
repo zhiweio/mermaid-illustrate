@@ -164,6 +164,6 @@ flowchart TD
     C2 --> C3[Add feature B]
     C3 --> C4[Release v1.0]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class C1,C2,C3,C4 bpProcess
 ```

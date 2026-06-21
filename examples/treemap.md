@@ -8,7 +8,7 @@ Treemap supports `:::className` syntax with `classDef`. Apply Blueprint colors t
 
 ### Syntax
 
-- Use `treemap-beta` keyword (requires Mermaid v11.0.0+, experimental feature 🔥)
+- Use `treemap-beta` keyword (requires Mermaid v11.0.0+, experimental)
 - Section/Parent nodes: `"Section Name"` (quoted text)
 - Leaf nodes with values: `"Leaf Name": value` (quoted text followed by colon and value)
 - Hierarchy: Created using indentation (spaces or tabs)
@@ -121,6 +121,6 @@ flowchart TD
     A --> A2
     A --> A3
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Root,A,B,C,A1,A2,A3 bpProcess
 ```

@@ -22,6 +22,10 @@ Reference: [Mermaid Timeline Diagram Documentation](https://mermaid.ai/open-sour
 ### Example (Basic Timeline)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Project Milestones
     2024 Q1 : Project Kickoff : Team formation
@@ -32,6 +36,10 @@ timeline
 ### Example (With Sections)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Product Development Timeline
     section 2024 Q1
@@ -48,6 +56,10 @@ timeline
 ### Example (Multiple Events per Period)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Company History
     2020 : Founded : First Product Launch
@@ -59,6 +71,10 @@ timeline
 ### Example (With Text Wrapping)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Long Event Names
     2024 Q1 : Project Kickoff and<br>Team Formation
@@ -69,6 +85,10 @@ timeline
 ### Example (Historical Timeline)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Technology Evolution
     section 1990s
@@ -84,6 +104,10 @@ timeline
 ### Example (Release Cycles)
 
 ```mermaid
+---
+config:
+  theme: 'base'
+---
 timeline
     title Release Schedule
     section Alpha
@@ -104,6 +128,6 @@ flowchart LR
     Phase1 --> Phase2[2024 Q3<br>Development Phase 2]
     Phase2 --> Launch[2024 Q4<br>Production Launch]
 
-    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px
+    classDef bpProcess fill:#edf5ff,stroke:#0f62fe,stroke-width:2px,color:#161616
     class Start,Phase1,Phase2,Launch bpProcess
 ```
